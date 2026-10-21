@@ -1,0 +1,49 @@
+// Expressions and collections — reference solutions
+// Sections correspond to the matching chapter in exercises/.
+
+// koan: 02.01 — Parentheses change the calculation
+// Make this expression produce 21. Parentheses group a subexpression before
+// multiplication.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!((5 + 2) * 3)
+}
+
+// koan: 02.02 — Join two strings
+// Produce the string firefly. ++ concatenates strings without inserting spaces.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!("fire" ++ "fly")
+}
+
+// koan: 02.03 — Count from zero
+// Print 20 from this list. nth selects an element by its zero-based index; the first
+// element has index 0.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!([10, 20, 30].nth(1))
+}
+
+// koan: 02.04 — Look up a named value
+// Print 7 by looking up the right key. A map stores values under keys; get retrieves the
+// value associated with a key.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!({"apples": 7, "pears": 4}.get("apples"))
+}
+
+// koan: 02.05 — Adding to an immutable set
+// Make the new set have three elements. Sets hold unique values; add returns a new set
+// and size counts its members.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!(Set(1, 2).add(3).size())
+}
+
+// koan: 02.06 — Numeric types must agree
+// Make this equality true. The suffix n denotes an arbitrary-precision integer. Both
+// operands of + must have the same numeric type.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!((100n + 25n) == 125n)
+}

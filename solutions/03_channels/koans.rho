@@ -1,0 +1,53 @@
+// Names, sends, and parallel composition — reference solutions
+// Sections correspond to the matching chapter in exercises/.
+
+// koan: 03.01 — Address the message
+// Send 7 to inbox. The receive below waits for a message on inbox, binds its value as n,
+// and prints it.
+
+new inbox, stdout(`rho:io:stdout`) in {
+  inbox!(7) |
+  for (@n <- inbox) { stdout!(n) }
+}
+
+// koan: 03.02 — Two processes can run together
+// Run both sends. The parallel composition operator allows both processes to run; their
+// printed order is not specified.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!(1) | stdout!(2)
+}
+
+// koan: 03.03 — Fresh names are distinct
+// Make the comparison false by comparing two different fresh names. new creates distinct
+// names; * exposes a name as a process value so it can be compared.
+
+new left, right, stdout(`rho:io:stdout`) in {
+  stdout!(*left == *right)
+}
+
+// koan: 03.04 — A receiver chooses a channel
+// Print only 2. Messages on one channel cannot satisfy a receive on a different fresh
+// channel.
+
+new left, right, stdout(`rho:io:stdout`) in {
+  left!(1) | right!(2) |
+  for (@value <- right) { stdout!(value) }
+}
+
+// koan: 03.05 — A quoted value can name a channel
+// Receive the message sent on the name made by quoting the string score. @ turns a
+// process value into a name; equal quoted values identify the same channel.
+
+new stdout(`rho:io:stdout`) in {
+  @"score"!(9) |
+  for (@n <- @"score") { stdout!(n) }
+}
+
+// koan: 03.06 — Doing nothing is a process
+// Print 7 without adding another action. Nil is the inactive process; composing it in
+// parallel with an action leaves that action alone.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!(7) | Nil
+}

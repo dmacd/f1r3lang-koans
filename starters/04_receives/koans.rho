@@ -1,0 +1,59 @@
+// Receives and reflection
+// Six koans, one file. Work downwards with ./koans running.
+// Replace __; keep the "// koan:" markers. Each koan runs independently.
+// Chapter notes: README.md
+
+// koan: 04.01 — Use the received value
+// The @value pattern binds the received process value. Print the value carried by the
+// message, using the binding rather than a new literal.
+
+new inbox, stdout(`rho:io:stdout`) in {
+  inbox!(7) |
+  for (@value <- inbox) { stdout!(__) }
+}
+
+// koan: 04.02 — A name binding needs dereferencing
+// A receive pattern without @ binds a name quoting the payload. Dereference that name to
+// print the original integer.
+
+new inbox, stdout(`rho:io:stdout`) in {
+  inbox!(8) |
+  for (value <- inbox) { stdout!(__) }
+}
+
+// koan: 04.03 — Send a process and then run it
+// Send a process that prints 9. The receiver binds a name for that process, and *code
+// runs it. Processes can be communicated as data.
+
+new trigger, stdout(`rho:io:stdout`) in {
+  trigger!(__) |
+  for (code <- trigger) { *code }
+}
+
+// koan: 04.04 — Send a reply channel
+// The request carries a value and a reply channel. The receiver uses ret to send the
+// incremented result back; make the final answer 6.
+
+new request, reply, stdout(`rho:io:stdout`) in {
+  request!(5, *reply) |
+  for (@n, ret <- request) { ret!(n + __) } |
+  for (@answer <- reply) { stdout!(answer) }
+}
+
+// koan: 04.05 — One payload can have structure
+// A tuple is one message argument containing multiple values. The tuple pattern binds x
+// and y. Print their sum.
+
+new pair, stdout(`rho:io:stdout`) in {
+  pair!((3, 4)) |
+  for (@(x, y) <- pair) { stdout!(x __ y) }
+}
+
+// koan: 04.06 — The number of message arguments matters
+// Send two separate integer arguments whose sum is 7. The receiver expects two
+// arguments; a single tuple would have the wrong shape.
+
+new pair, stdout(`rho:io:stdout`) in {
+  pair!(__) |
+  for (@x, @y <- pair) { stdout!(x + y) }
+}

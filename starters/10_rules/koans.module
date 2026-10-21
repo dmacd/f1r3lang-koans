@@ -1,0 +1,101 @@
+-- Equations and rewrites
+-- Six koans, one file. Work downwards with ./koans running.
+-- Replace __; keep the "-- koan:" markers. Each koan runs independently.
+-- Chapter notes: README.md
+
+-- koan: 10.01 — An equation states an identity
+-- Complete the right identity equation for Add. Equations use constructor labels in
+-- prefix form; this declares a law rather than performing an addition.
+
+Module Identity {
+ Theory T() {
+Types { Value; }
+Terms {
+  Zero . |- "0" : Value;
+  Add . x:Value, y:Value |- "(" x "+" y ")" : Value;
+}
+ Equations { (Add x (Zero)) == __; }
+ }
+ theory T()
+}
+
+-- koan: 10.02 — Describe commutativity
+-- Declare that swapping the arguments of Add preserves its meaning. Use the constructor
+-- label Add in the right-hand expression.
+
+Module Commutative {
+ Theory T() {
+Types { Value; }
+Terms {
+  Zero . |- "0" : Value;
+  Add . x:Value, y:Value |- "(" x "+" y ")" : Value;
+}
+ Equations { (Add x y) == __; }
+ }
+ theory T()
+}
+
+-- koan: 10.03 — A rewrite has a direction
+-- Complete the simplifying rewrite DropZero. ~> describes a directed rule, unlike the
+-- symmetric == of an equation.
+
+Module Simplification {
+ Theory T() {
+Types { Value; }
+Terms {
+  Zero . |- "0" : Value;
+  Add . x:Value, y:Value |- "(" x "+" y ")" : Value;
+}
+ Rewrites { DropZero : (Add x (Zero)) ~> __; }
+ }
+ theory T()
+}
+
+-- koan: 10.04 — Declare constructors before using them
+-- Choose the already declared constructor Zero in this equation. Builder blocks are
+-- processed in order; a rule cannot refer forward to a later constructor.
+
+Module Ordered {
+ Theory T() {
+Types { Value; }
+Terms {
+  Zero . |- "0" : Value;
+  Add . x:Value, y:Value |- "(" x "+" y ")" : Value;
+}
+ Equations { (Add (__) x) == x; }
+ }
+ theory T()
+}
+
+-- koan: 10.05 — Give each rewrite a name
+-- Name this simplifying rule DropZero. A rewrite name lets tools identify the rule as
+-- part of the theory presentation.
+
+Module NamedRules {
+ Theory T() {
+Types { Value; }
+Terms {
+  Zero . |- "0" : Value;
+  Add . x:Value, y:Value |- "(" x "+" y ")" : Value;
+}
+ Rewrites { __ : (Add (Zero) x) ~> x; }
+ }
+ theory T()
+}
+
+-- koan: 10.06 — Keep equations and rewrites distinct
+-- Keep the commutativity equation and complete the directed simplification rule. Both
+-- belong to the theory, but they express different relationships.
+
+Module Laws {
+ Theory T() {
+Types { Value; }
+Terms {
+  Zero . |- "0" : Value;
+  Add . x:Value, y:Value |- "(" x "+" y ")" : Value;
+}
+ Equations { (Add x y) == (Add y x); }
+ Rewrites { DropZero : (Add x (Zero)) ~> __; }
+ }
+ theory T()
+}

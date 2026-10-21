@@ -1,0 +1,76 @@
+-- Parameters and reuse
+-- Six koans, one file. Work downwards with ./koans running.
+-- Replace __; keep the "-- koan:" markers. Each koan runs independently.
+-- Chapter notes: README.md
+
+-- koan: 11.01 — Extend a supplied theory
+-- A theory parameter supplies an existing presentation. Complete the base of Decorated
+-- with its parameter so Value is available when Wrap is added.
+
+Module Parameter {
+ Theory Base() { Types { Value; } Exports { Value; } }
+ Theory Decorated(b: Base) {
+   __ Terms { Wrap . x:Value |- "wrap" x : Value; }
+ }
+ theory Decorated(Base())
+}
+
+-- koan: 11.02 — Rename an exported category
+-- Rename Value to Expr on export. The elaborator carries the category rename into the
+-- constructor result as well.
+
+Module Export {
+ Theory T() {
+  Types { Value; }
+  Terms { Zero . |- "0" : Value; }
+  Exports { Value => __; }
+ }
+ theory T()
+}
+
+-- koan: 11.03 — Replace a constructor spelling and label
+-- Replace Zero with Nothing, keeping the category Value. Replacements adapt inherited
+-- syntax rather than adding a second constructor.
+
+Module Replacement {
+ Theory Base() { Types { Value; } Terms { Zero . |- "0" : Value; } }
+ Theory Words(b: Base) {
+  b Replacements { Zero => __ . |- "empty" : Value; }
+ }
+ theory Words(Base())
+}
+
+-- koan: 11.04 — A replacement updates inherited laws
+-- Rename Zero to Nothing. The inherited identity equation must then mention Nothing as
+-- well; the elaborator performs that propagation.
+
+Module RenameLaws {
+ Theory Base() {
+Types { Value; }
+Terms {
+  Zero . |- "0" : Value;
+  Add . x:Value, y:Value |- "(" x "+" y ")" : Value;
+}
+ Equations { (Add x (Zero)) == x; }
+ }
+ Theory Words(b: Base) { b Replacements { Zero => __ . |- "empty" : Value; } }
+ theory Words(Base())
+}
+
+-- koan: 11.05 — Import a module under an alias
+-- Import the bundled local module as lib and choose its Base theory. Imports in this
+-- course use local files so the lessons work offline.
+
+import "support/base.module" as lib
+Module Import {
+  theory __
+}
+
+-- koan: 11.06 — Import one theory by name
+-- Complete the name of the theory imported from the local support module. This import
+-- makes Base available without an alias prefix.
+
+import __ from "support/base.module"
+Module NamedImport {
+  theory Base()
+}

@@ -1,0 +1,4 @@
+Module Library {
+  Theory Base() { Types { Value; } Exports { Value; } }
+  theory Base()
+}

@@ -1,0 +1,72 @@
+-- Modules and declarations — reference solutions
+-- Sections correspond to the matching chapter in exercises/.
+
+-- koan: 09.01 — Declare a category
+-- A Module packages theory declarations. Types declares the categories of a little
+-- language. Complete the category name so the presentation contains Value.
+
+Module Categories {
+  Theory T() { Types { Value; } }
+  theory T()
+}
+
+-- koan: 09.02 — Give a category one term
+-- Terms declares syntax. A rule has a label, an argument context, concrete syntax, and a
+-- result category. Complete the category of the constant Zero.
+
+Module Constants {
+  Theory T() {
+    Types { Value; }
+    Terms { Zero . |- "zero" : Value; }
+  }
+  theory T()
+}
+
+-- koan: 09.03 — Choose the theory to elaborate
+-- A module can declare several theories. Select Warm as the entry theory so the
+-- resulting presentation contains Color and Red.
+
+Module Choices {
+  Theory Warm() { Types { Color; } Terms { Red . |- "red" : Color; } }
+  Theory Cold() { Types { Color; } Terms { Blue . |- "blue" : Color; } }
+  theory Warm()
+}
+
+-- koan: 09.04 — Reference a term argument
+-- An argument context gives names and categories to inputs. Use the declared argument
+-- exactly once in the concrete syntax of Wrap.
+
+Module Arguments {
+  Theory T() {
+    Types { Value; }
+    Terms { Wrap . x:Value |- "wrap" "(" x ")" : Value; }
+  }
+  theory T()
+}
+
+-- koan: 09.05 — A term with two arguments
+-- Declare the result category of Pair. Both arguments have category Value, and both are
+-- referenced in its concrete syntax.
+
+Module Pairs {
+  Theory T() {
+    Types { Value; }
+    Terms { Pair . left:Value, right:Value |- "(" left "," right ")" : Value; }
+  }
+  theory T()
+}
+
+-- koan: 09.06 — Labels identify constructors
+-- Add the label One for the second constructor. Labels must be unique within the
+-- resulting theory; concrete spellings and labels have different roles.
+
+Module Labels {
+  Theory T() {
+    Types { Value; }
+    Terms {
+      Zero . |- "0" : Value;
+      One . |- "1" : Value;
+    }
+  }
+  theory T()
+}

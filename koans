@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+"""Run the course from any working directory."""
+from koans_lib.cli import main
+
+if __name__ == "__main__":
+    raise SystemExit(main())

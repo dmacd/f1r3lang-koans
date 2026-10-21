@@ -1,0 +1,69 @@
+// Coordination and state
+// Six koans, one file. Work downwards with ./koans running.
+// Replace __; keep the "// koan:" markers. Each koan runs independently.
+// Chapter notes: README.md
+
+// koan: 07.01 — Wait for both channels together
+// Join the two receives so the body runs after one message from each channel is
+// available. The two messages are consumed together.
+
+new left, right, stdout(`rho:io:stdout`) in {
+  left!(4) | right!(5) |
+  for (@x <- left __ @y <- right) { stdout!(x + y) }
+}
+
+// koan: 07.02 — A later receive can use an earlier binding
+// First receive a channel name, then receive its message. A semicolon separates
+// sequential receipt groups and makes the first binding available to the second.
+
+new first, stdout(`rho:io:stdout`) in {
+  first!("next") | @"next"!(5) |
+  for (channel <- first __ @value <- channel) { stdout!(value) }
+}
+
+// koan: 07.03 — Read without consuming
+// Read the same 5 twice and print 10. The first receive must leave the message available
+// for the nested consuming receive.
+
+new cell, stdout(`rho:io:stdout`) in {
+  cell!(5) |
+  for (@x __ cell) {
+    for (@y <- cell) { stdout!(x + y) }
+  }
+}
+
+// koan: 07.04 — Replace the state message
+// A mutable cell is a channel holding the current value. Consume the old value and send
+// an updated one so the final read yields 15.
+
+new cell, done, stdout(`rho:io:stdout`) in {
+  cell!(10) |
+  for (@old <- cell) { cell!(old + __) | done!(Nil) } |
+  for (_ <- done) {
+    for (@n <- cell) { stdout!(n) }
+  }
+}
+
+// koan: 07.05 — Order visible actions with an acknowledgment
+// Print first and then second in that order. stdoutAck signals ack after printing; the
+// receive then enables the second print.
+
+new ack, stdoutAck(`rho:io:stdoutAck`), stdout(`rho:io:stdout`) in {
+  stdoutAck!("first", *ack) |
+  for (_ <- ack) { stdout!(__) }
+}
+
+// koan: 07.06 — Two updates share a cell
+// Both increment requests must take the cell value before replacing it. After both
+// acknowledgments, compare the final count with the number of updates.
+
+new cell, increment, done1, done2, stdout(`rho:io:stdout`) in {
+  cell!(0) |
+  contract increment(ret) = {
+    for (@n <- cell) { cell!(n + 1) | ret!(Nil) }
+  } |
+  increment!(*done1) | increment!(*done2) |
+  for (_ <- done1 & _ <- done2) {
+    for (@n <- cell) { stdout!(n == __) }
+  }
+}

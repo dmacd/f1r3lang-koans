@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "platform": "x86_64-unknown-linux-gnu",
+  "runtime": {
+    "release": "v0.4.46-canary.3999",
+    "revision": "616e0c5fdbb7a501987f69d55586f8a69824f8a1",
+    "url": "https://codeload.github.com/F1R3FLY-io/f1r3node-rust/tar.gz/616e0c5fdbb7a501987f69d55586f8a69824f8a1",
+    "sha256": "477905b18a7aa65b0e331b8ccb8d9d9c9f5915345c3c2cf8c71a134c83730553",
+    "archive": "runtime.tar.gz",
+    "root": "f1r3node-rust-616e0c5fdbb7a501987f69d55586f8a69824f8a1",
+    "parser_revision": "527af8afb37f6cad470516fe316076f120b9c353",
+    "status": "prerelease; required for executable where guards",
+    "cargo_lock": "toolchain/runtime.Cargo.lock",
+    "cargo_lock_sha256": "9bf9a3425927d4fcbf2b8551850c5b1042e12d83bcc3341c84ac9051826bd6be"
+  },
+  "elaborator": {
+    "revision": "9c57a82b9ceaf798b361918369056312a33b051c",
+    "url": "https://codeload.github.com/F1R3FLY-io/f1r3node-rust/tar.gz/9c57a82b9ceaf798b361918369056312a33b051c",
+    "sha256": "c9be3782fb2485f13f7387748b798a79d2188dd69bc9a8e7d87f9b14824d0422",
+    "archive": "elaborator.tar.gz",
+    "root": "f1r3node-rust-9c57a82b9ceaf798b361918369056312a33b051c",
+    "crate": "module-syntax/mettail-elab",
+    "status": "unreleased reference elaborator; no external crate dependencies",
+    "cargo_lock": "toolchain/elaborator.Cargo.lock",
+    "cargo_lock_sha256": "2b0f1bdbd3c206b385cd6c55ee9dd3573124a3d24b8a2e9dc7c3c216f730e0f1"
+  },
+  "rust": {
+    "channel": "nightly-2026-02-09",
+    "status": "dated upstream requirement; installed locally without changing system Rust",
+    "components": [
+      {
+        "name": "rustc",
+        "url": "https://static.rust-lang.org/dist/2026-02-09/rustc-nightly-x86_64-unknown-linux-gnu.tar.xz",
+        "sha256": "806e59be9b8cc063d4ddd40d818f50c0757a49470bacc7fbe05bd43b7e1ace0b",
+        "archive": "rustc.tar.xz",
+        "root": "rustc-nightly-x86_64-unknown-linux-gnu"
+      },
+      {
+        "name": "rust-std",
+        "url": "https://static.rust-lang.org/dist/2026-02-09/rust-std-nightly-x86_64-unknown-linux-gnu.tar.xz",
+        "sha256": "7f2c092558281377d92a6fb88cd1f8f43b15d7945aa40cca1ddf31d90aa63cf9",
+        "archive": "rust-std.tar.xz",
+        "root": "rust-std-nightly-x86_64-unknown-linux-gnu"
+      },
+      {
+        "name": "cargo",
+        "url": "https://static.rust-lang.org/dist/2026-02-09/cargo-nightly-x86_64-unknown-linux-gnu.tar.xz",
+        "sha256": "f3eafedc0cfe2d5e749a38eb938be64dc66592d62e9f7e23d377ca40beeda5ae",
+        "archive": "cargo.tar.xz",
+        "root": "cargo-nightly-x86_64-unknown-linux-gnu"
+      }
+    ]
+  },
+  "protoc": {
+    "version": "29.3",
+    "url": "https://github.com/protocolbuffers/protobuf/releases/download/v29.3/protoc-29.3-linux-x86_64.zip",
+    "sha256": "3e866620c5be27664f3d2fa2d656b5f3e09b5152b42f1bedbf427b333e90021a",
+    "archive": "protoc.zip"
+  }
+}

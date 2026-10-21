@@ -1,0 +1,1692 @@
+{
+  "version": 1,
+  "exercises": [
+    {
+      "id": "01.01",
+      "chapter": "Values and observations",
+      "title": "A first observation",
+      "backend": "rho",
+      "source": "exercises/01_values/koans.rho",
+      "solution": "solutions/01_values/koans.rho",
+      "context": "stdout!(value) prints a value. Make this program print the Boolean value true. The surrounding new block connects stdout to the built-in output channel.",
+      "hints": [
+        "A Boolean literal is written without quotation marks.",
+        "The two Boolean literals are true and false."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "true"
+        ]
+      },
+      "focus": 5,
+      "section": "01.01"
+    },
+    {
+      "id": "01.02",
+      "chapter": "Values and observations",
+      "title": "An integer is a value",
+      "backend": "rho",
+      "source": "exercises/01_values/koans.rho",
+      "solution": "solutions/01_values/koans.rho",
+      "context": "Make the output be the integer 42. An integer literal is a whole number written directly in the program.",
+      "hints": [
+        "Numbers do not need quotation marks.",
+        "Use a whole-number literal here."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "42"
+        ]
+      },
+      "focus": 5,
+      "section": "01.02"
+    },
+    {
+      "id": "01.03",
+      "chapter": "Values and observations",
+      "title": "Words need quotation marks",
+      "backend": "rho",
+      "source": "exercises/01_values/koans.rho",
+      "solution": "solutions/01_values/koans.rho",
+      "context": "Print the string hello. Strings use double quotation marks; an unquoted word is treated as an identifier.",
+      "hints": [
+        "The quote characters are part of the source syntax.",
+        "Compare the number 42 with the string \"42\"."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "\"hello\""
+        ]
+      },
+      "focus": 5,
+      "section": "01.03"
+    },
+    {
+      "id": "01.04",
+      "chapter": "Values and observations",
+      "title": "Observe a calculation",
+      "backend": "rho",
+      "source": "exercises/01_values/koans.rho",
+      "solution": "solutions/01_values/koans.rho",
+      "context": "Make the program print 5. The interpreter evaluates the arithmetic expression before sending its result to stdout.",
+      "hints": [
+        "The + operator adds two integers.",
+        "Find the missing addend in 2 + ? = 5."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "5"
+        ]
+      },
+      "focus": 5,
+      "section": "01.04"
+    },
+    {
+      "id": "01.05",
+      "chapter": "Values and observations",
+      "title": "Ask whether values agree",
+      "backend": "rho",
+      "source": "exercises/01_values/koans.rho",
+      "solution": "solutions/01_values/koans.rho",
+      "context": "Make this comparison print true. == compares two values and produces a Boolean.",
+      "hints": [
+        "Both sides of == must have the same value for this test to pass.",
+        "An arithmetic expression can stand wherever an integer value is expected."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "true"
+        ]
+      },
+      "focus": 4,
+      "section": "01.05"
+    },
+    {
+      "id": "01.06",
+      "chapter": "Values and observations",
+      "title": "There can be many right answers",
+      "backend": "rho",
+      "source": "exercises/01_values/koans.rho",
+      "solution": "solutions/01_values/koans.rho",
+      "context": "Make the comparison print true. != asks whether two values differ. More than one answer can satisfy this koan.",
+      "hints": [
+        "Choose an integer that differs from 3.",
+        "The runner checks the result, so it accepts more than the reference answer."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "true"
+        ]
+      },
+      "focus": 5,
+      "section": "01.06"
+    },
+    {
+      "id": "02.01",
+      "chapter": "Expressions and collections",
+      "title": "Parentheses change the calculation",
+      "backend": "rho",
+      "source": "exercises/02_expressions/koans.rho",
+      "solution": "solutions/02_expressions/koans.rho",
+      "context": "Make this expression produce 21. Parentheses group a subexpression before multiplication.",
+      "hints": [
+        "Work backwards from 21 divided by 3.",
+        "The parenthesized sum needs to be 7."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "21"
+        ]
+      },
+      "focus": 5,
+      "section": "02.01"
+    },
+    {
+      "id": "02.02",
+      "chapter": "Expressions and collections",
+      "title": "Join two strings",
+      "backend": "rho",
+      "source": "exercises/02_expressions/koans.rho",
+      "solution": "solutions/02_expressions/koans.rho",
+      "context": "Produce the string firefly. ++ concatenates strings without inserting spaces.",
+      "hints": [
+        "The missing piece is another string.",
+        "The result must contain fire immediately followed by fly."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "\"firefly\""
+        ]
+      },
+      "focus": 4,
+      "section": "02.02"
+    },
+    {
+      "id": "02.03",
+      "chapter": "Expressions and collections",
+      "title": "Count from zero",
+      "backend": "rho",
+      "source": "exercises/02_expressions/koans.rho",
+      "solution": "solutions/02_expressions/koans.rho",
+      "context": "Print 20 from this list. nth selects an element by its zero-based index; the first element has index 0.",
+      "hints": [
+        "Find the index of the second element.",
+        "The valid indexes of this list are 0, 1, and 2."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "20"
+        ]
+      },
+      "focus": 5,
+      "section": "02.03"
+    },
+    {
+      "id": "02.04",
+      "chapter": "Expressions and collections",
+      "title": "Look up a named value",
+      "backend": "rho",
+      "source": "exercises/02_expressions/koans.rho",
+      "solution": "solutions/02_expressions/koans.rho",
+      "context": "Print 7 by looking up the right key. A map stores values under keys; get retrieves the value associated with a key.",
+      "hints": [
+        "Map keys are values too; these keys are strings.",
+        "Choose the key whose value is 7."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "7"
+        ]
+      },
+      "focus": 5,
+      "section": "02.04"
+    },
+    {
+      "id": "02.05",
+      "chapter": "Expressions and collections",
+      "title": "Adding to an immutable set",
+      "backend": "rho",
+      "source": "exercises/02_expressions/koans.rho",
+      "solution": "solutions/02_expressions/koans.rho",
+      "context": "Make the new set have three elements. Sets hold unique values; add returns a new set and size counts its members.",
+      "hints": [
+        "Adding an existing element does not increase the size.",
+        "Choose a value absent from Set(1, 2)."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "3"
+        ]
+      },
+      "focus": 5,
+      "section": "02.05"
+    },
+    {
+      "id": "02.06",
+      "chapter": "Expressions and collections",
+      "title": "Numeric types must agree",
+      "backend": "rho",
+      "source": "exercises/02_expressions/koans.rho",
+      "solution": "solutions/02_expressions/koans.rho",
+      "context": "Make this equality true. The suffix n denotes an arbitrary-precision integer. Both operands of + must have the same numeric type.",
+      "hints": [
+        "The missing value must also carry the n suffix.",
+        "Ordinary 25 and arbitrary-precision 25n are different numeric types."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "true"
+        ]
+      },
+      "focus": 5,
+      "section": "02.06"
+    },
+    {
+      "id": "03.01",
+      "chapter": "Names, sends, and parallel composition",
+      "title": "Address the message",
+      "backend": "rho",
+      "source": "exercises/03_channels/koans.rho",
+      "solution": "solutions/03_channels/koans.rho",
+      "context": "Send 7 to inbox. The receive below waits for a message on inbox, binds its value as n, and prints it.",
+      "hints": [
+        "A send is written channel!(message).",
+        "Use the name introduced by new, without quotes."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "7"
+        ]
+      },
+      "focus": 5,
+      "section": "03.01"
+    },
+    {
+      "id": "03.02",
+      "chapter": "Names, sends, and parallel composition",
+      "title": "Two processes can run together",
+      "backend": "rho",
+      "source": "exercises/03_channels/koans.rho",
+      "solution": "solutions/03_channels/koans.rho",
+      "context": "Run both sends. The parallel composition operator allows both processes to run; their printed order is not specified.",
+      "hints": [
+        "Use the operator that looks like a vertical bar.",
+        "The runner compares these two observations without imposing an order."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "1",
+          "2"
+        ]
+      },
+      "focus": 5,
+      "section": "03.02"
+    },
+    {
+      "id": "03.03",
+      "chapter": "Names, sends, and parallel composition",
+      "title": "Fresh names are distinct",
+      "backend": "rho",
+      "source": "exercises/03_channels/koans.rho",
+      "solution": "solutions/03_channels/koans.rho",
+      "context": "Make the comparison false by comparing two different fresh names. new creates distinct names; * exposes a name as a process value so it can be compared.",
+      "hints": [
+        "left and right are created independently.",
+        "Fill in the name different from left; the * is already supplied."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "false"
+        ]
+      },
+      "focus": 5,
+      "section": "03.03"
+    },
+    {
+      "id": "03.04",
+      "chapter": "Names, sends, and parallel composition",
+      "title": "A receiver chooses a channel",
+      "backend": "rho",
+      "source": "exercises/03_channels/koans.rho",
+      "solution": "solutions/03_channels/koans.rho",
+      "context": "Print only 2. Messages on one channel cannot satisfy a receive on a different fresh channel.",
+      "hints": [
+        "Follow the channel that was sent 2.",
+        "The unconsumed message on the other channel does not print itself."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "2"
+        ]
+      },
+      "focus": 6,
+      "section": "03.04"
+    },
+    {
+      "id": "03.05",
+      "chapter": "Names, sends, and parallel composition",
+      "title": "A quoted value can name a channel",
+      "backend": "rho",
+      "source": "exercises/03_channels/koans.rho",
+      "solution": "solutions/03_channels/koans.rho",
+      "context": "Receive the message sent on the name made by quoting the string score. @ turns a process value into a name; equal quoted values identify the same channel.",
+      "hints": [
+        "The @ is already present on the receiving side.",
+        "The sender quotes a string; use the same string for the receiver."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "9"
+        ]
+      },
+      "focus": 6,
+      "section": "03.05"
+    },
+    {
+      "id": "03.06",
+      "chapter": "Names, sends, and parallel composition",
+      "title": "Doing nothing is a process",
+      "backend": "rho",
+      "source": "exercises/03_channels/koans.rho",
+      "solution": "solutions/03_channels/koans.rho",
+      "context": "Print 7 without adding another action. Nil is the inactive process; composing it in parallel with an action leaves that action alone.",
+      "hints": [
+        "The inactive process starts with a capital N.",
+        "The language spelling is Nil."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "7"
+        ]
+      },
+      "focus": 5,
+      "section": "03.06"
+    },
+    {
+      "id": "04.01",
+      "chapter": "Receives and reflection",
+      "title": "Use the received value",
+      "backend": "rho",
+      "source": "exercises/04_receives/koans.rho",
+      "solution": "solutions/04_receives/koans.rho",
+      "context": "The @value pattern binds the received process value. Print the value carried by the message, using the binding rather than a new literal.",
+      "hints": [
+        "The name of the binding appears immediately after @.",
+        "Inside the receive body, value refers to the received integer."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "7"
+        ]
+      },
+      "focus": 6,
+      "section": "04.01"
+    },
+    {
+      "id": "04.02",
+      "chapter": "Receives and reflection",
+      "title": "A name binding needs dereferencing",
+      "backend": "rho",
+      "source": "exercises/04_receives/koans.rho",
+      "solution": "solutions/04_receives/koans.rho",
+      "context": "A receive pattern without @ binds a name quoting the payload. Dereference that name to print the original integer.",
+      "hints": [
+        "* converts a name back into the process it quotes.",
+        "Use *value in the body."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "8"
+        ]
+      },
+      "focus": 6,
+      "section": "04.02"
+    },
+    {
+      "id": "04.03",
+      "chapter": "Receives and reflection",
+      "title": "Send a process and then run it",
+      "backend": "rho",
+      "source": "exercises/04_receives/koans.rho",
+      "solution": "solutions/04_receives/koans.rho",
+      "context": "Send a process that prints 9. The receiver binds a name for that process, and *code runs it. Processes can be communicated as data.",
+      "hints": [
+        "The missing payload can itself be a send.",
+        "The body *code dereferences the received name and activates the quoted process."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "9"
+        ]
+      },
+      "focus": 5,
+      "section": "04.03"
+    },
+    {
+      "id": "04.04",
+      "chapter": "Receives and reflection",
+      "title": "Send a reply channel",
+      "backend": "rho",
+      "source": "exercises/04_receives/koans.rho",
+      "solution": "solutions/04_receives/koans.rho",
+      "context": "The request carries a value and a reply channel. The receiver uses ret to send the incremented result back; make the final answer 6.",
+      "hints": [
+        "The second request argument is *reply, so the name pattern ret can use it as a channel.",
+        "The arithmetic in the server should add one."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "6"
+        ]
+      },
+      "focus": 6,
+      "section": "04.04"
+    },
+    {
+      "id": "04.05",
+      "chapter": "Receives and reflection",
+      "title": "One payload can have structure",
+      "backend": "rho",
+      "source": "exercises/04_receives/koans.rho",
+      "solution": "solutions/04_receives/koans.rho",
+      "context": "A tuple is one message argument containing multiple values. The tuple pattern binds x and y. Print their sum.",
+      "hints": [
+        "The send has one tuple argument, unlike request!(5, *reply).",
+        "Choose the integer addition operator."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "7"
+        ]
+      },
+      "focus": 6,
+      "section": "04.05"
+    },
+    {
+      "id": "04.06",
+      "chapter": "Receives and reflection",
+      "title": "The number of message arguments matters",
+      "backend": "rho",
+      "source": "exercises/04_receives/koans.rho",
+      "solution": "solutions/04_receives/koans.rho",
+      "context": "Send two separate integer arguments whose sum is 7. The receiver expects two arguments; a single tuple would have the wrong shape.",
+      "hints": [
+        "Separate two message arguments with a comma.",
+        "For example, choose integers 3 and 4 as separate arguments."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "7"
+        ]
+      },
+      "focus": 5,
+      "section": "04.06"
+    },
+    {
+      "id": "05.01",
+      "chapter": "Patterns and choices",
+      "title": "Match an exact value",
+      "backend": "rho",
+      "source": "exercises/05_patterns/koans.rho",
+      "solution": "solutions/05_patterns/koans.rho",
+      "context": "Choose the zero branch. match tries patterns in source order; a literal pattern accepts only that value.",
+      "hints": [
+        "Supply a value matching the first pattern.",
+        "The underscore in the second branch is a wildcard, not a blank to edit."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "\"zero\""
+        ]
+      },
+      "focus": 5,
+      "section": "05.01"
+    },
+    {
+      "id": "05.02",
+      "chapter": "Patterns and choices",
+      "title": "Take a tuple apart",
+      "backend": "rho",
+      "source": "exercises/05_patterns/koans.rho",
+      "solution": "solutions/05_patterns/koans.rho",
+      "context": "The tuple pattern binds each position. Print the sum of the two bound values.",
+      "hints": [
+        "Patterns name parts of the existing value.",
+        "x and y are the integers 2 and 3 inside the branch."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "5"
+        ]
+      },
+      "focus": 5,
+      "section": "05.02"
+    },
+    {
+      "id": "05.03",
+      "chapter": "Patterns and choices",
+      "title": "Bind the rest of a list",
+      "backend": "rho",
+      "source": "exercises/05_patterns/koans.rho",
+      "solution": "solutions/05_patterns/koans.rho",
+      "context": "head binds the first element; ...tail binds the remaining list. Print the number of elements in the tail.",
+      "hints": [
+        "The list method length() counts elements.",
+        "tail is [3, 5], not the last element alone."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "2"
+        ]
+      },
+      "focus": 6,
+      "section": "05.03"
+    },
+    {
+      "id": "05.04",
+      "chapter": "Patterns and choices",
+      "title": "A wildcard supplies a fallback",
+      "backend": "rho",
+      "source": "exercises/05_patterns/koans.rho",
+      "solution": "solutions/05_patterns/koans.rho",
+      "context": "Make the fallback print other. _ matches any value without creating a binding. This fallback handles 99 after the zero pattern fails.",
+      "hints": [
+        "The missing expression is the output string.",
+        "Use a string literal; the wildcard has no value you can refer to."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "\"other\""
+        ]
+      },
+      "focus": 7,
+      "section": "05.04"
+    },
+    {
+      "id": "05.05",
+      "chapter": "Patterns and choices",
+      "title": "A pattern can require an integer",
+      "backend": "rho",
+      "source": "exercises/05_patterns/koans.rho",
+      "solution": "solutions/05_patterns/koans.rho",
+      "context": "Make the integer branch print 42. x /\\ Int binds a value only when it has the ordinary integer type.",
+      "hints": [
+        "The branch adds one to the input.",
+        "A quoted number is a string and would choose the fallback."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "42"
+        ]
+      },
+      "focus": 5,
+      "section": "05.05"
+    },
+    {
+      "id": "05.06",
+      "chapter": "Patterns and choices",
+      "title": "Choose with a Boolean expression",
+      "backend": "rho",
+      "source": "exercises/05_patterns/koans.rho",
+      "solution": "solutions/05_patterns/koans.rho",
+      "context": "Make the program print yes. if requires a Boolean condition; integers are not automatically treated as true or false.",
+      "hints": [
+        "A comparison produces a Boolean.",
+        "For example, compare two ordered integers with <."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "\"yes\""
+        ]
+      },
+      "focus": 5,
+      "section": "05.06"
+    },
+    {
+      "id": "06.01",
+      "chapter": "Contracts and recursion",
+      "title": "A receiver that stays available",
+      "backend": "rho",
+      "source": "exercises/06_contracts/koans.rho",
+      "solution": "solutions/06_contracts/koans.rho",
+      "context": "Process both messages and print 2 and 3. A persistent receive stays available for subsequent matching messages.",
+      "hints": [
+        "The persistent receive arrow is <=; the one-shot arrow is <-.",
+        "There are two messages, so a one-shot receive can only print one result."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "2",
+          "3"
+        ]
+      },
+      "focus": 6,
+      "section": "06.01"
+    },
+    {
+      "id": "06.02",
+      "chapter": "Contracts and recursion",
+      "title": "A contract is a persistent service",
+      "backend": "rho",
+      "source": "exercises/06_contracts/koans.rho",
+      "solution": "solutions/06_contracts/koans.rho",
+      "context": "Complete the double service so the reply is 6. contract declares a persistent receiver on a named channel.",
+      "hints": [
+        "The request supplies an integer and a reply channel.",
+        "Multiply the integer by 2 before replying."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "6"
+        ]
+      },
+      "focus": 5,
+      "section": "06.02"
+    },
+    {
+      "id": "06.03",
+      "chapter": "Contracts and recursion",
+      "title": "Serve independent requests",
+      "backend": "rho",
+      "source": "exercises/06_contracts/koans.rho",
+      "solution": "solutions/06_contracts/koans.rho",
+      "context": "Make the service respond with 11 and 21. Both requests use the same contract, which remains available after the first call.",
+      "hints": [
+        "The requests contain 10 and 20.",
+        "Each response should add the same increment."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "11",
+          "21"
+        ]
+      },
+      "focus": 5,
+      "section": "06.03"
+    },
+    {
+      "id": "06.04",
+      "chapter": "Contracts and recursion",
+      "title": "Recursion needs progress",
+      "backend": "rho",
+      "source": "exercises/06_contracts/koans.rho",
+      "solution": "solutions/06_contracts/koans.rho",
+      "context": "Print 3, 2, and 1 and stop recursing at zero. The printed order is deliberately not asserted: the print and recursive call run in parallel.",
+      "hints": [
+        "Each recursive call must move toward the stopping condition.",
+        "Pass n - 1 to the next call."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "3",
+          "2",
+          "1"
+        ]
+      },
+      "focus": 6,
+      "section": "06.04"
+    },
+    {
+      "id": "06.05",
+      "chapter": "Contracts and recursion",
+      "title": "Combine a recursive result",
+      "backend": "rho",
+      "source": "exercises/06_contracts/koans.rho",
+      "solution": "solutions/06_contracts/koans.rho",
+      "context": "Sum a list by asking for the tail sum on a private reply channel, then combining it with the head. The empty list contributes zero.",
+      "hints": [
+        "The result s is the sum of the remaining elements.",
+        "Combine h and s with addition."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "6"
+        ]
+      },
+      "focus": 11,
+      "section": "06.05"
+    },
+    {
+      "id": "06.06",
+      "chapter": "Contracts and recursion",
+      "title": "A service can create another service",
+      "backend": "rho",
+      "source": "exercises/06_contracts/koans.rho",
+      "solution": "solutions/06_contracts/koans.rho",
+      "context": "The factory creates a private adder that remembers amount. Use the returned adder to produce 12 when amount is 5.",
+      "hints": [
+        "The name returned on made is a channel for the new service.",
+        "Choose the input that becomes 12 after adding 5."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "12"
+        ]
+      },
+      "focus": 14,
+      "section": "06.06"
+    },
+    {
+      "id": "07.01",
+      "chapter": "Coordination and state",
+      "title": "Wait for both channels together",
+      "backend": "rho",
+      "source": "exercises/07_coordination/koans.rho",
+      "solution": "solutions/07_coordination/koans.rho",
+      "context": "Join the two receives so the body runs after one message from each channel is available. The two messages are consumed together.",
+      "hints": [
+        "The join separator is &.",
+        "A join differs from |, which composes whole processes."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "9"
+        ]
+      },
+      "focus": 6,
+      "section": "07.01"
+    },
+    {
+      "id": "07.02",
+      "chapter": "Coordination and state",
+      "title": "A later receive can use an earlier binding",
+      "backend": "rho",
+      "source": "exercises/07_coordination/koans.rho",
+      "solution": "solutions/07_coordination/koans.rho",
+      "context": "First receive a channel name, then receive its message. A semicolon separates sequential receipt groups and makes the first binding available to the second.",
+      "hints": [
+        "The second channel is not known until the first receive completes.",
+        "Use ; between these receipt groups."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "5"
+        ]
+      },
+      "focus": 6,
+      "section": "07.02"
+    },
+    {
+      "id": "07.03",
+      "chapter": "Coordination and state",
+      "title": "Read without consuming",
+      "backend": "rho",
+      "source": "exercises/07_coordination/koans.rho",
+      "solution": "solutions/07_coordination/koans.rho",
+      "context": "Read the same 5 twice and print 10. The first receive must leave the message available for the nested consuming receive.",
+      "hints": [
+        "The peek arrow is <<-.",
+        "If the first receive consumes the message, the nested receive has nothing to read."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "10"
+        ]
+      },
+      "focus": 6,
+      "section": "07.03"
+    },
+    {
+      "id": "07.04",
+      "chapter": "Coordination and state",
+      "title": "Replace the state message",
+      "backend": "rho",
+      "source": "exercises/07_coordination/koans.rho",
+      "solution": "solutions/07_coordination/koans.rho",
+      "context": "A mutable cell is a channel holding the current value. Consume the old value and send an updated one so the final read yields 15.",
+      "hints": [
+        "The current value is 10.",
+        "The completion signal gates the final read; it is a separate message carrying Nil."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "15"
+        ]
+      },
+      "focus": 6,
+      "section": "07.04"
+    },
+    {
+      "id": "07.05",
+      "chapter": "Coordination and state",
+      "title": "Order visible actions with an acknowledgment",
+      "backend": "rho",
+      "source": "exercises/07_coordination/koans.rho",
+      "solution": "solutions/07_coordination/koans.rho",
+      "context": "Print first and then second in that order. stdoutAck signals ack after printing; the receive then enables the second print.",
+      "hints": [
+        "Complete the second output string.",
+        "An acknowledgment establishes ordering that two parallel stdout sends do not."
+      ],
+      "expect": {
+        "mode": "ordered",
+        "events": [
+          "\"first\"",
+          "\"second\""
+        ]
+      },
+      "focus": 6,
+      "section": "07.05"
+    },
+    {
+      "id": "07.06",
+      "chapter": "Coordination and state",
+      "title": "Two updates share a cell",
+      "backend": "rho",
+      "source": "exercises/07_coordination/koans.rho",
+      "solution": "solutions/07_coordination/koans.rho",
+      "context": "Both increment requests must take the cell value before replacing it. After both acknowledgments, compare the final count with the number of updates.",
+      "hints": [
+        "Only one update can hold the cell message at a time.",
+        "There are two increment requests, starting from zero."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "true"
+        ]
+      },
+      "focus": 11,
+      "section": "07.06"
+    },
+    {
+      "id": "08.01",
+      "chapter": "Guards",
+      "title": "A guard filters candidate messages",
+      "backend": "rho",
+      "source": "exercises/08_guards/koans.rho",
+      "solution": "solutions/08_guards/koans.rho",
+      "context": "Accept the positive integer 7. The where condition must be true before the candidate message is consumed.",
+      "hints": [
+        "Choose a comparison that accepts a positive number.",
+        "The condition should mean x is greater than zero."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "7"
+        ]
+      },
+      "focus": 6,
+      "section": "08.01"
+    },
+    {
+      "id": "08.02",
+      "chapter": "Guards",
+      "title": "A failed guard leaves the message available",
+      "backend": "rho",
+      "source": "exercises/08_guards/koans.rho",
+      "solution": "solutions/08_guards/koans.rho",
+      "context": "The positive receiver cannot consume -3. The negative receiver can still take that message; print its bound value.",
+      "hints": [
+        "The matching negative receiver binds the integer as x.",
+        "A rejected candidate is still available to a different matching receive."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "-3"
+        ]
+      },
+      "focus": 7,
+      "section": "08.02"
+    },
+    {
+      "id": "08.03",
+      "chapter": "Guards",
+      "title": "A join guard can compare both messages",
+      "backend": "rho",
+      "source": "exercises/08_guards/koans.rho",
+      "solution": "solutions/08_guards/koans.rho",
+      "context": "Allow the join only when the value from left is smaller than the value from right. The guard sees bindings from both channels.",
+      "hints": [
+        "Write a Boolean comparison using x and y.",
+        "Both messages are available, but the guard must also succeed."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "10"
+        ]
+      },
+      "focus": 6,
+      "section": "08.03"
+    },
+    {
+      "id": "08.04",
+      "chapter": "Guards",
+      "title": "A false match guard tries the next case",
+      "backend": "rho",
+      "source": "exercises/08_guards/koans.rho",
+      "solution": "solutions/08_guards/koans.rho",
+      "context": "Print small. The first pattern binds 4, but its guard should reject values at most 10 so matching continues to the fallback.",
+      "hints": [
+        "Matching the pattern alone does not select a guarded case.",
+        "Use x > 10 for the first guard."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "\"small\""
+        ]
+      },
+      "focus": 6,
+      "section": "08.04"
+    },
+    {
+      "id": "08.05",
+      "chapter": "Guards",
+      "title": "Each sequential receipt group has a guard",
+      "backend": "rho",
+      "source": "exercises/08_guards/koans.rho",
+      "solution": "solutions/08_guards/koans.rho",
+      "context": "Require a positive value in each receipt group. Each guard checks its own binding; the final body can use both received values.",
+      "hints": [
+        "Compare y against zero in its own group.",
+        "The body adds x and y after both guards have passed."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "7"
+        ]
+      },
+      "focus": 6,
+      "section": "08.05"
+    },
+    {
+      "id": "08.06",
+      "chapter": "Guards",
+      "title": "Select a job by its contents",
+      "backend": "rho",
+      "source": "exercises/08_guards/koans.rho",
+      "solution": "solutions/08_guards/koans.rho",
+      "context": "Print job ID 2. Each job is a tuple of ID and score, sent on its own channel. Use the same score threshold in both blanks to reject job 1 and accept job 2.",
+      "hints": [
+        "The scores are 2 and 8.",
+        "Any integer threshold greater than 2 and at most 8 satisfies the condition."
+      ],
+      "expect": {
+        "mode": "unordered",
+        "events": [
+          "2"
+        ]
+      },
+      "focus": 6,
+      "section": "08.06"
+    },
+    {
+      "id": "09.01",
+      "chapter": "Modules and declarations",
+      "title": "Declare a category",
+      "backend": "module",
+      "source": "exercises/09_declarations/koans.module",
+      "solution": "solutions/09_declarations/koans.module",
+      "context": "A Module packages theory declarations. Types declares the categories of a little language. Complete the category name so the presentation contains Value.",
+      "hints": [
+        "This is a declaration checked by the elaborator, not an executed .rho program.",
+        "The final lowercase theory expression chooses which theory to elaborate."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 5,
+      "section": "09.01"
+    },
+    {
+      "id": "09.02",
+      "chapter": "Modules and declarations",
+      "title": "Give a category one term",
+      "backend": "module",
+      "source": "exercises/09_declarations/koans.module",
+      "solution": "solutions/09_declarations/koans.module",
+      "context": "Terms declares syntax. A rule has a label, an argument context, concrete syntax, and a result category. Complete the category of the constant Zero.",
+      "hints": [
+        "An empty context before |- means this term takes no arguments.",
+        "The result category must have been declared by Types."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Zero .  |- \"zero\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 7,
+      "section": "09.02"
+    },
+    {
+      "id": "09.03",
+      "chapter": "Modules and declarations",
+      "title": "Choose the theory to elaborate",
+      "backend": "module",
+      "source": "exercises/09_declarations/koans.module",
+      "solution": "solutions/09_declarations/koans.module",
+      "context": "A module can declare several theories. Select Warm as the entry theory so the resulting presentation contains Color and Red.",
+      "hints": [
+        "The lowercase theory expression is the entry point.",
+        "Theory names are followed by parentheses even when no arguments are needed."
+      ],
+      "expect": {
+        "Types": [
+          "Color"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Red .  |- \"red\" : Color;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 7,
+      "section": "09.03"
+    },
+    {
+      "id": "09.04",
+      "chapter": "Modules and declarations",
+      "title": "Reference a term argument",
+      "backend": "module",
+      "source": "exercises/09_declarations/koans.module",
+      "solution": "solutions/09_declarations/koans.module",
+      "context": "An argument context gives names and categories to inputs. Use the declared argument exactly once in the concrete syntax of Wrap.",
+      "hints": [
+        "The context before |- declares x:Value.",
+        "A quoted \"x\" is a literal character, whereas unquoted x refers to the argument."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Wrap . x:Value |- \"wrap\" \"(\" x \")\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 7,
+      "section": "09.04"
+    },
+    {
+      "id": "09.05",
+      "chapter": "Modules and declarations",
+      "title": "A term with two arguments",
+      "backend": "module",
+      "source": "exercises/09_declarations/koans.module",
+      "solution": "solutions/09_declarations/koans.module",
+      "context": "Declare the result category of Pair. Both arguments have category Value, and both are referenced in its concrete syntax.",
+      "hints": [
+        "The same declared category can be used for arguments and results.",
+        "The presentation should contain a Pair constructor returning Value."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Pair . left:Value, right:Value |- \"(\" left \",\" right \")\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 7,
+      "section": "09.05"
+    },
+    {
+      "id": "09.06",
+      "chapter": "Modules and declarations",
+      "title": "Labels identify constructors",
+      "backend": "module",
+      "source": "exercises/09_declarations/koans.module",
+      "solution": "solutions/09_declarations/koans.module",
+      "context": "Add the label One for the second constructor. Labels must be unique within the resulting theory; concrete spellings and labels have different roles.",
+      "hints": [
+        "The constructor label occurs before the dot.",
+        "Zero already names the first constructor."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Zero .  |- \"0\" : Value;",
+          "One .  |- \"1\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 9,
+      "section": "09.06"
+    },
+    {
+      "id": "10.01",
+      "chapter": "Equations and rewrites",
+      "title": "An equation states an identity",
+      "backend": "module",
+      "source": "exercises/10_rules/koans.module",
+      "solution": "solutions/10_rules/koans.module",
+      "context": "Complete the right identity equation for Add. Equations use constructor labels in prefix form; this declares a law rather than performing an addition.",
+      "hints": [
+        "The identity says adding Zero leaves x unchanged.",
+        "A nullary constructor is written (Zero) inside an equation."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Zero .  |- \"0\" : Value;",
+          "Add . x:Value, y:Value |- \"(\" x \"+\" y \")\" : Value;"
+        ],
+        "Equations": [
+          "(Add x (Zero)) == x;"
+        ],
+        "Rewrites": []
+      },
+      "focus": 11,
+      "section": "10.01"
+    },
+    {
+      "id": "10.02",
+      "chapter": "Equations and rewrites",
+      "title": "Describe commutativity",
+      "backend": "module",
+      "source": "exercises/10_rules/koans.module",
+      "solution": "solutions/10_rules/koans.module",
+      "context": "Declare that swapping the arguments of Add preserves its meaning. Use the constructor label Add in the right-hand expression.",
+      "hints": [
+        "Equations describe an equality between two term shapes.",
+        "Exchange x and y in the right-hand Add application."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Zero .  |- \"0\" : Value;",
+          "Add . x:Value, y:Value |- \"(\" x \"+\" y \")\" : Value;"
+        ],
+        "Equations": [
+          "(Add x y) == (Add y x);"
+        ],
+        "Rewrites": []
+      },
+      "focus": 11,
+      "section": "10.02"
+    },
+    {
+      "id": "10.03",
+      "chapter": "Equations and rewrites",
+      "title": "A rewrite has a direction",
+      "backend": "module",
+      "source": "exercises/10_rules/koans.module",
+      "solution": "solutions/10_rules/koans.module",
+      "context": "Complete the simplifying rewrite DropZero. ~> describes a directed rule, unlike the symmetric == of an equation.",
+      "hints": [
+        "Removing addition by Zero should leave x.",
+        "The elaborator checks and retains this rule; it does not execute a generated evaluator."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Zero .  |- \"0\" : Value;",
+          "Add . x:Value, y:Value |- \"(\" x \"+\" y \")\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": [
+          "DropZero : (Add x (Zero)) ~> x;"
+        ]
+      },
+      "focus": 11,
+      "section": "10.03"
+    },
+    {
+      "id": "10.04",
+      "chapter": "Equations and rewrites",
+      "title": "Declare constructors before using them",
+      "backend": "module",
+      "source": "exercises/10_rules/koans.module",
+      "solution": "solutions/10_rules/koans.module",
+      "context": "Choose the already declared constructor Zero in this equation. Builder blocks are processed in order; a rule cannot refer forward to a later constructor.",
+      "hints": [
+        "Look at the Terms block before Equations.",
+        "The equation must refer to (Zero), not an undeclared constructor."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Zero .  |- \"0\" : Value;",
+          "Add . x:Value, y:Value |- \"(\" x \"+\" y \")\" : Value;"
+        ],
+        "Equations": [
+          "(Add (Zero) x) == x;"
+        ],
+        "Rewrites": []
+      },
+      "focus": 11,
+      "section": "10.04"
+    },
+    {
+      "id": "10.05",
+      "chapter": "Equations and rewrites",
+      "title": "Give each rewrite a name",
+      "backend": "module",
+      "source": "exercises/10_rules/koans.module",
+      "solution": "solutions/10_rules/koans.module",
+      "context": "Name this simplifying rule DropZero. A rewrite name lets tools identify the rule as part of the theory presentation.",
+      "hints": [
+        "The name appears before the colon, not inside the term expression.",
+        "Use the requested identifier with its capital letters."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Zero .  |- \"0\" : Value;",
+          "Add . x:Value, y:Value |- \"(\" x \"+\" y \")\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": [
+          "DropZero : (Add (Zero) x) ~> x;"
+        ]
+      },
+      "focus": 11,
+      "section": "10.05"
+    },
+    {
+      "id": "10.06",
+      "chapter": "Equations and rewrites",
+      "title": "Keep equations and rewrites distinct",
+      "backend": "module",
+      "source": "exercises/10_rules/koans.module",
+      "solution": "solutions/10_rules/koans.module",
+      "context": "Keep the commutativity equation and complete the directed simplification rule. Both belong to the theory, but they express different relationships.",
+      "hints": [
+        "The equation exchanges arguments; the rewrite removes Zero.",
+        "The right-hand side of the simplification is x."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Zero .  |- \"0\" : Value;",
+          "Add . x:Value, y:Value |- \"(\" x \"+\" y \")\" : Value;"
+        ],
+        "Equations": [
+          "(Add x y) == (Add y x);"
+        ],
+        "Rewrites": [
+          "DropZero : (Add x (Zero)) ~> x;"
+        ]
+      },
+      "focus": 12,
+      "section": "10.06"
+    },
+    {
+      "id": "11.01",
+      "chapter": "Parameters and reuse",
+      "title": "Extend a supplied theory",
+      "backend": "module",
+      "source": "exercises/11_reuse/koans.module",
+      "solution": "solutions/11_reuse/koans.module",
+      "context": "A theory parameter supplies an existing presentation. Complete the base of Decorated with its parameter so Value is available when Wrap is added.",
+      "hints": [
+        "The parameter is named b and has theory type Base.",
+        "Use b as the body base rather than constructing an unrelated Base()."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [
+          "Value"
+        ],
+        "Terms": [
+          "Wrap . x:Value |- \"wrap\" x : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 7,
+      "section": "11.01"
+    },
+    {
+      "id": "11.02",
+      "chapter": "Parameters and reuse",
+      "title": "Rename an exported category",
+      "backend": "module",
+      "source": "exercises/11_reuse/koans.module",
+      "solution": "solutions/11_reuse/koans.module",
+      "context": "Rename Value to Expr on export. The elaborator carries the category rename into the constructor result as well.",
+      "hints": [
+        "The export arrow maps the existing category to its public spelling.",
+        "Use Expr as the new name."
+      ],
+      "expect": {
+        "Types": [
+          "Expr"
+        ],
+        "Exports": [
+          "Expr"
+        ],
+        "Terms": [
+          "Zero .  |- \"0\" : Expr;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 8,
+      "section": "11.02"
+    },
+    {
+      "id": "11.03",
+      "chapter": "Parameters and reuse",
+      "title": "Replace a constructor spelling and label",
+      "backend": "module",
+      "source": "exercises/11_reuse/koans.module",
+      "solution": "solutions/11_reuse/koans.module",
+      "context": "Replace Zero with Nothing, keeping the category Value. Replacements adapt inherited syntax rather than adding a second constructor.",
+      "hints": [
+        "The target of the replacement is the existing label Zero.",
+        "The new label must be Nothing; its concrete spelling is already supplied."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Nothing .  |- \"empty\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 7,
+      "section": "11.03"
+    },
+    {
+      "id": "11.04",
+      "chapter": "Parameters and reuse",
+      "title": "A replacement updates inherited laws",
+      "backend": "module",
+      "source": "exercises/11_reuse/koans.module",
+      "solution": "solutions/11_reuse/koans.module",
+      "context": "Rename Zero to Nothing. The inherited identity equation must then mention Nothing as well; the elaborator performs that propagation.",
+      "hints": [
+        "Only the constructor replacement belongs in the blank.",
+        "The resulting equation should be (Add x (Nothing)) == x."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [],
+        "Terms": [
+          "Nothing .  |- \"empty\" : Value;",
+          "Add . x:Value, y:Value |- \"(\" x \"+\" y \")\" : Value;"
+        ],
+        "Equations": [
+          "(Add x (Nothing)) == x;"
+        ],
+        "Rewrites": []
+      },
+      "focus": 13,
+      "section": "11.04"
+    },
+    {
+      "id": "11.05",
+      "chapter": "Parameters and reuse",
+      "title": "Import a module under an alias",
+      "backend": "module",
+      "source": "exercises/11_reuse/koans.module",
+      "solution": "solutions/11_reuse/koans.module",
+      "context": "Import the bundled local module as lib and choose its Base theory. Imports in this course use local files so the lessons work offline.",
+      "hints": [
+        "The alias prefixes the imported theory name with a dot.",
+        "The imported file defines Base with no parameters."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [
+          "Value"
+        ],
+        "Terms": [],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 6,
+      "inputs": [
+        "exercises/11_reuse/support/base.module"
+      ],
+      "section": "11.05"
+    },
+    {
+      "id": "11.06",
+      "chapter": "Parameters and reuse",
+      "title": "Import one theory by name",
+      "backend": "module",
+      "source": "exercises/11_reuse/koans.module",
+      "solution": "solutions/11_reuse/koans.module",
+      "context": "Complete the name of the theory imported from the local support module. This import makes Base available without an alias prefix.",
+      "hints": [
+        "The library declares a theory called Base.",
+        "The entry expression already calls Base()."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [
+          "Value"
+        ],
+        "Terms": [],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 4,
+      "inputs": [
+        "exercises/11_reuse/support/base.module"
+      ],
+      "section": "11.06"
+    },
+    {
+      "id": "12.01",
+      "chapter": "Sharing and composition",
+      "title": "Create the common ancestor once",
+      "backend": "module",
+      "source": "exercises/12_composition/koans.module",
+      "solution": "solutions/12_composition/koans.module",
+      "context": "Both extensions must share the same Base instance. Pass the existing b to Right so the join has one category Value.",
+      "hints": [
+        "Calling Base() again would invent another category with the same spelling.",
+        "Sharing is established by passing the same bound instance."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [
+          "Value"
+        ],
+        "Terms": [
+          "A .  |- \"a\" : Value;",
+          "B .  |- \"b\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 10,
+      "section": "12.01"
+    },
+    {
+      "id": "12.02",
+      "chapter": "Sharing and composition",
+      "title": "Join extensions over their shared base",
+      "backend": "module",
+      "source": "exercises/12_composition/koans.module",
+      "solution": "solutions/12_composition/koans.module",
+      "context": "Combine both extensions so the result contains A and B with a single shared Value category. The theory join operator is written backslash-slash.",
+      "hints": [
+        "The join spelling is \\/, distinct from process parallel composition |.",
+        "Both arguments already descend from the same b."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [
+          "Value"
+        ],
+        "Terms": [
+          "A .  |- \"a\" : Value;",
+          "B .  |- \"b\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 10,
+      "section": "12.02"
+    },
+    {
+      "id": "12.03",
+      "chapter": "Sharing and composition",
+      "title": "Keep the shared fragment",
+      "backend": "module",
+      "source": "exercises/12_composition/koans.module",
+      "solution": "solutions/12_composition/koans.module",
+      "context": "Keep only what Left and Right inherit in common. Their shared ancestor contributes Value; A and B are independent additions.",
+      "hints": [
+        "The meet operator is /\\.",
+        "The resulting presentation should have Value and no constructors."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [
+          "Value"
+        ],
+        "Terms": [],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 10,
+      "section": "12.03"
+    },
+    {
+      "id": "12.04",
+      "chapter": "Sharing and composition",
+      "title": "A shared constructor appears once",
+      "backend": "module",
+      "source": "exercises/12_composition/koans.module",
+      "solution": "solutions/12_composition/koans.module",
+      "context": "Both branches inherit the same Seed presentation. Pass the existing s to BranchB so joining the branches retains one Zero constructor.",
+      "hints": [
+        "Create Seed(b) once, then share its result with both branches.",
+        "A second call to Seed(b) creates a distinct constructor origin."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [
+          "Value"
+        ],
+        "Terms": [
+          "Zero .  |- \"0\" : Value;",
+          "A .  |- \"a\" : Value;",
+          "B .  |- \"b\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 10,
+      "section": "12.04"
+    },
+    {
+      "id": "12.05",
+      "chapter": "Sharing and composition",
+      "title": "Subtract by shared origin",
+      "backend": "module",
+      "source": "exercises/12_composition/koans.module",
+      "solution": "solutions/12_composition/koans.module",
+      "context": "Remove the inherited One constructor using the same Mon instance m. Difference removes shared origins, including categories; the final join restores the shared base b so Extra still has its Value category.",
+      "hints": [
+        "The difference operator is a single backslash.",
+        "Subtract the previously bound instance m."
+      ],
+      "expect": {
+        "Types": [
+          "Value"
+        ],
+        "Exports": [
+          "Value"
+        ],
+        "Terms": [
+          "Extra .  |- \"extra\" : Value;"
+        ],
+        "Equations": [],
+        "Rewrites": []
+      },
+      "focus": 10,
+      "section": "12.05"
+    },
+    {
+      "id": "12.06",
+      "chapter": "Sharing and composition",
+      "title": "Assemble a tiny expression language",
+      "backend": "module",
+      "source": "exercises/12_composition/koans.module",
+      "solution": "solutions/12_composition/koans.module",
+      "context": "Combine values and addition over a shared category, then add a simplification rule. Complete the join and the rewrite result to describe the requested language.",
+      "hints": [
+        "Use the theory join to retain constructors from both branches.",
+        "The simplification rule returns x; these declarations describe a language but do not run its expressions."
+      ],
+      "expect": {
+        "Types": [
+          "Expr"
+        ],
+        "Exports": [
+          "Expr"
+        ],
+        "Terms": [
+          "Zero .  |- \"0\" : Expr;",
+          "Add . x:Expr, y:Expr |- \"(\" x \"+\" y \")\" : Expr;"
+        ],
+        "Equations": [],
+        "Rewrites": [
+          "DropZero : (Add x (Zero)) ~> x;"
+        ]
+      },
+      "focus": 9,
+      "section": "12.06"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+-- Sharing and composition — reference solutions
+-- Sections correspond to the matching chapter in exercises/.
+
+-- koan: 12.01 — Create the common ancestor once
+-- Both extensions must share the same Base instance. Pass the existing b to Right so the
+-- join has one category Value.
+
+Module Sharing {
+
+Theory Base() { Types { Value; } Exports { Value; } }
+Theory Left(b: Base) { b Terms { A . |- "a" : Value; } }
+Theory Right(b: Base) { b Terms { B . |- "b" : Value; } }
+
+ theory let b = Base() in (Left(b) \/ Right(b))
+}
+
+-- koan: 12.02 — Join extensions over their shared base
+-- Combine both extensions so the result contains A and B with a single shared Value
+-- category. The theory join operator is written backslash-slash.
+
+Module Join {
+
+Theory Base() { Types { Value; } Exports { Value; } }
+Theory Left(b: Base) { b Terms { A . |- "a" : Value; } }
+Theory Right(b: Base) { b Terms { B . |- "b" : Value; } }
+
+ theory let b = Base() in (Left(b) \/ Right(b))
+}
+
+-- koan: 12.03 — Keep the shared fragment
+-- Keep only what Left and Right inherit in common. Their shared ancestor contributes
+-- Value; A and B are independent additions.
+
+Module Meet {
+
+Theory Base() { Types { Value; } Exports { Value; } }
+Theory Left(b: Base) { b Terms { A . |- "a" : Value; } }
+Theory Right(b: Base) { b Terms { B . |- "b" : Value; } }
+
+ theory let b = Base() in (Left(b) /\ Right(b))
+}
+
+-- koan: 12.04 — A shared constructor appears once
+-- Both branches inherit the same Seed presentation. Pass the existing s to BranchB so
+-- joining the branches retains one Zero constructor.
+
+Module Diamond {
+  Theory Base() { Types { Value; } Exports { Value; } }
+  Theory Seed(b: Base) { b Terms { Zero . |- "0" : Value; } }
+  Theory BranchA(s: Seed) { s Terms { A . |- "a" : Value; } }
+  Theory BranchB(s: Seed) { s Terms { B . |- "b" : Value; } }
+  theory let b = Base() in (
+    let s = Seed(b) in (BranchA(s) \/ BranchB(s))
+  )
+}
+
+-- koan: 12.05 — Subtract by shared origin
+-- Remove the inherited One constructor using the same Mon instance m. Difference removes
+-- shared origins, including categories; the final join restores the shared base b so
+-- Extra still has its Value category.
+
+Module Difference {
+  Theory Base() { Types { Value; } Exports { Value; } }
+  Theory Mon(b: Base) { b Terms { One . |- "1" : Value; } }
+  Theory Big(m: Mon) { m Terms { Extra . |- "extra" : Value; } }
+  theory let b = Base() in (
+    let m = Mon(b) in ((Big(m) \ m) \/ b)
+  )
+}
+
+-- koan: 12.06 — Assemble a tiny expression language
+-- Combine values and addition over a shared category, then add a simplification rule.
+-- Complete the join and the rewrite result to describe the requested language.
+
+Module TinyExpressions {
+  Theory Base() { Types { Expr; } Exports { Expr; } }
+  Theory Values(b: Base) { b Terms { Zero . |- "0" : Expr; } }
+  Theory Addition(b: Base) { b Terms { Add . x:Expr, y:Expr |- "(" x "+" y ")" : Expr; } }
+  Theory Simplify(v: Values, a: Addition) {
+    { v \/ a }
+      Rewrites { DropZero : (Add x (Zero)) ~> x; }
+  }
+  theory let b = Base() in (Simplify(Values(b), Addition(b)))
+}

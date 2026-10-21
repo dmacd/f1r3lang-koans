@@ -1,0 +1,51 @@
+// Values and observations
+// Six koans, one file. Work downwards with ./koans running.
+// Replace __; keep the "// koan:" markers. Each koan runs independently.
+// Chapter notes: README.md
+
+// koan: 01.01 — A first observation
+// stdout!(value) prints a value. Make this program print the Boolean value true. The
+// surrounding new block connects stdout to the built-in output channel.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!(__)
+}
+
+// koan: 01.02 — An integer is a value
+// Make the output be the integer 42. An integer literal is a whole number written
+// directly in the program.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!(__)
+}
+
+// koan: 01.03 — Words need quotation marks
+// Print the string hello. Strings use double quotation marks; an unquoted word is
+// treated as an identifier.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!(__)
+}
+
+// koan: 01.04 — Observe a calculation
+// Make the program print 5. The interpreter evaluates the arithmetic expression before
+// sending its result to stdout.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!(2 + __)
+}
+
+// koan: 01.05 — Ask whether values agree
+// Make this comparison print true. == compares two values and produces a Boolean.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!((2 + 3) == __)
+}
+
+// koan: 01.06 — There can be many right answers
+// Make the comparison print true. != asks whether two values differ. More than one
+// answer can satisfy this koan.
+
+new stdout(`rho:io:stdout`) in {
+  stdout!(3 != __)
+}

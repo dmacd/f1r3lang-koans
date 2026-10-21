@@ -1,0 +1,6 @@
+// Pinned runtime limitation: expected 7; can produce no output or 7.
+// See docs/toolchain.md. This is a reproduction, not a learner exercise.
+new items, stdout(`rho:io:stdout`) in {
+  items!(-3) | items!(7) |
+  for (@x <- items where x > 0) { stdout!(x) }
+}

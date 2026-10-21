@@ -1,0 +1,7 @@
+.toolchain/
+__pycache__/
+*.py[cod]
+.coverage
+
+# Local answers. Setup copies the shareable course from starters/.
+/exercises/

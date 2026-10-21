@@ -1,0 +1,62 @@
+// Patterns and choices — reference solutions
+// Sections correspond to the matching chapter in exercises/.
+
+// koan: 05.01 — Match an exact value
+// Choose the zero branch. match tries patterns in source order; a literal pattern
+// accepts only that value.
+
+new stdout(`rho:io:stdout`) in {
+  match 0 {
+    0 => { stdout!("zero") }
+    _ => { stdout!("other") }
+  }
+}
+
+// koan: 05.02 — Take a tuple apart
+// The tuple pattern binds each position. Print the sum of the two bound values.
+
+new stdout(`rho:io:stdout`) in {
+  match (2, 3) {
+    (x, y) => { stdout!(x + y) }
+  }
+}
+
+// koan: 05.03 — Bind the rest of a list
+// head binds the first element; ...tail binds the remaining list. Print the number of
+// elements in the tail.
+
+new stdout(`rho:io:stdout`) in {
+  match [2, 3, 5] {
+    [head ...tail] => { stdout!(tail.length()) }
+  }
+}
+
+// koan: 05.04 — A wildcard supplies a fallback
+// Make the fallback print other. _ matches any value without creating a binding. This
+// fallback handles 99 after the zero pattern fails.
+
+new stdout(`rho:io:stdout`) in {
+  match 99 {
+    0 => { stdout!("zero") }
+    _ => { stdout!("other") }
+  }
+}
+
+// koan: 05.05 — A pattern can require an integer
+// Make the integer branch print 42. x /\ Int binds a value only when it has the ordinary
+// integer type.
+
+new stdout(`rho:io:stdout`) in {
+  match 41 {
+    x /\ Int => { stdout!(x + 1) }
+    _ => { stdout!(0) }
+  }
+}
+
+// koan: 05.06 — Choose with a Boolean expression
+// Make the program print yes. if requires a Boolean condition; integers are not
+// automatically treated as true or false.
+
+new stdout(`rho:io:stdout`) in {
+  if (3 < 4) { stdout!("yes") } else { stdout!("no") }
+}

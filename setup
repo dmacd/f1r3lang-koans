@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+
+if [[ ${1:-} == --help || ${1:-} == -h ]]; then
+    echo 'Usage: ./setup [--jobs N]'
+    echo 'Install missing Ubuntu build packages, then build the pinned tools in .toolchain/.'
+    echo 'Build parallelism defaults to 2. Existing exercise edits are preserved.'
+    exit 0
+fi
+if [[ $(uname -s) != Linux || $(uname -m) != x86_64 ]]; then
+    echo 'Setup currently supports Ubuntu 22.04/24.04 on x86_64.' >&2
+    exit 2
+fi
+source /etc/os-release
+if [[ ${ID:-} != ubuntu || ( ${VERSION_ID:-} != 22.04 && ${VERSION_ID:-} != 24.04 ) ]]; then
+    echo 'Setup currently supports Ubuntu 22.04 and 24.04.' >&2
+    exit 2
+fi
+if ! grep -qm1 -w aes /proc/cpuinfo; then
+    echo 'The upstream runtime build requires an x86_64 CPU with AES instructions.' >&2
+    exit 2
+fi
+missing=()
+for package in python3 ca-certificates xz-utils build-essential pkg-config libssl-dev git; do
+    if [[ $(dpkg-query -W -f='${Status}' "$package" 2>/dev/null || true) != 'install ok installed' ]]; then
+        missing+=("$package")
+    fi
+done
+if (( ${#missing[@]} )); then
+    printf 'Installing missing build packages: %s\n' "${missing[*]}"
+    if (( EUID == 0 )); then
+        apt-get update
+        apt-get install -y "${missing[@]}"
+    else
+        sudo apt-get update
+        sudo apt-get install -y "${missing[@]}"
+    fi
+fi
+exec python3 -m koans_lib.setup "$@"

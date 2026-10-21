@@ -1,0 +1,8 @@
+// Pinned runtime limitation: expected 7, observed no output.
+// Using y > 0 in the second guard produces 7 with the pinned runtime.
+new first, second, stdout(`rho:io:stdout`) in {
+  first!(2) | second!(5) |
+  for (@x <- first where x > 0; @y <- second where y > x) {
+    stdout!(x + y)
+  }
+}

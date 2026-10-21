@@ -1,0 +1,62 @@
+// Guards
+// Six koans, one file. Work downwards with ./koans running.
+// Replace __; keep the "// koan:" markers. Each koan runs independently.
+// Chapter notes: README.md
+
+// koan: 08.01 — A guard filters candidate messages
+// Accept the positive integer 7. The where condition must be true before the candidate
+// message is consumed.
+
+new items, stdout(`rho:io:stdout`) in {
+  items!(7) |
+  for (@x <- items where x __ 0) { stdout!(x) }
+}
+
+// koan: 08.02 — A failed guard leaves the message available
+// The positive receiver cannot consume -3. The negative receiver can still take that
+// message; print its bound value.
+
+new items, stdout(`rho:io:stdout`) in {
+  items!(-3) |
+  for (@x <- items where x > 0) { stdout!("unexpected") } |
+  for (@x <- items where x < 0) { stdout!(__) }
+}
+
+// koan: 08.03 — A join guard can compare both messages
+// Allow the join only when the value from left is smaller than the value from right. The
+// guard sees bindings from both channels.
+
+new left, right, stdout(`rho:io:stdout`) in {
+  left!(4) | right!(6) |
+  for (@x <- left & @y <- right where __) { stdout!(x + y) }
+}
+
+// koan: 08.04 — A false match guard tries the next case
+// Print small. The first pattern binds 4, but its guard should reject values at most 10
+// so matching continues to the fallback.
+
+new stdout(`rho:io:stdout`) in {
+  match 4 {
+    x where __ => { stdout!("large") }
+    _ => { stdout!("small") }
+  }
+}
+
+// koan: 08.05 — Each sequential receipt group has a guard
+// Require a positive value in each receipt group. Each guard checks its own binding; the
+// final body can use both received values.
+
+new first, second, stdout(`rho:io:stdout`) in {
+  first!(2) | second!(5) |
+  for (@x <- first where x > 0; @y <- second where y > __) { stdout!(x + y) }
+}
+
+// koan: 08.06 — Select a job by its contents
+// Print job ID 2. Each job is a tuple of ID and score, sent on its own channel. Use the
+// same score threshold in both blanks to reject job 1 and accept job 2.
+
+new low, high, stdout(`rho:io:stdout`) in {
+  low!((1, 2)) | high!((2, 8)) |
+  for (@(id, score) <- low where score >= __) { stdout!(id) } |
+  for (@(id, score) <- high where score >= __) { stdout!(id) }
+}

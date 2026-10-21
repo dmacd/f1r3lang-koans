@@ -1,0 +1,74 @@
+-- Modules and declarations
+-- Six koans, one file. Work downwards with ./koans running.
+-- Replace __; keep the "-- koan:" markers. Each koan runs independently.
+-- Chapter notes: README.md
+
+-- koan: 09.01 — Declare a category
+-- A Module packages theory declarations. Types declares the categories of a little
+-- language. Complete the category name so the presentation contains Value.
+
+Module Categories {
+  Theory T() { Types { __; } }
+  theory T()
+}
+
+-- koan: 09.02 — Give a category one term
+-- Terms declares syntax. A rule has a label, an argument context, concrete syntax, and a
+-- result category. Complete the category of the constant Zero.
+
+Module Constants {
+  Theory T() {
+    Types { Value; }
+    Terms { Zero . |- "zero" : __; }
+  }
+  theory T()
+}
+
+-- koan: 09.03 — Choose the theory to elaborate
+-- A module can declare several theories. Select Warm as the entry theory so the
+-- resulting presentation contains Color and Red.
+
+Module Choices {
+  Theory Warm() { Types { Color; } Terms { Red . |- "red" : Color; } }
+  Theory Cold() { Types { Color; } Terms { Blue . |- "blue" : Color; } }
+  theory __
+}
+
+-- koan: 09.04 — Reference a term argument
+-- An argument context gives names and categories to inputs. Use the declared argument
+-- exactly once in the concrete syntax of Wrap.
+
+Module Arguments {
+  Theory T() {
+    Types { Value; }
+    Terms { Wrap . x:Value |- "wrap" "(" __ ")" : Value; }
+  }
+  theory T()
+}
+
+-- koan: 09.05 — A term with two arguments
+-- Declare the result category of Pair. Both arguments have category Value, and both are
+-- referenced in its concrete syntax.
+
+Module Pairs {
+  Theory T() {
+    Types { Value; }
+    Terms { Pair . left:Value, right:Value |- "(" left "," right ")" : __; }
+  }
+  theory T()
+}
+
+-- koan: 09.06 — Labels identify constructors
+-- Add the label One for the second constructor. Labels must be unique within the
+-- resulting theory; concrete spellings and labels have different roles.
+
+Module Labels {
+  Theory T() {
+    Types { Value; }
+    Terms {
+      Zero . |- "0" : Value;
+      __ . |- "1" : Value;
+    }
+  }
+  theory T()
+}

@@ -1,0 +1,83 @@
+// Contracts and recursion
+// Six koans, one file. Work downwards with ./koans running.
+// Replace __; keep the "// koan:" markers. Each koan runs independently.
+// Chapter notes: README.md
+
+// koan: 06.01 — A receiver that stays available
+// Process both messages and print 2 and 3. A persistent receive stays available for
+// subsequent matching messages.
+
+new inbox, stdout(`rho:io:stdout`) in {
+  inbox!(1) | inbox!(2) |
+  for (@n __ inbox) { stdout!(n + 1) }
+}
+
+// koan: 06.02 — A contract is a persistent service
+// Complete the double service so the reply is 6. contract declares a persistent receiver
+// on a named channel.
+
+new double, reply, stdout(`rho:io:stdout`) in {
+  contract double(@n, ret) = { ret!(n __ 2) } |
+  double!(3, *reply) |
+  for (@answer <- reply) { stdout!(answer) }
+}
+
+// koan: 06.03 — Serve independent requests
+// Make the service respond with 11 and 21. Both requests use the same contract, which
+// remains available after the first call.
+
+new increment, stdout(`rho:io:stdout`) in {
+  contract increment(@n) = { stdout!(n + __) } |
+  increment!(10) | increment!(20)
+}
+
+// koan: 06.04 — Recursion needs progress
+// Print 3, 2, and 1 and stop recursing at zero. The printed order is deliberately not
+// asserted: the print and recursive call run in parallel.
+
+new count, stdout(`rho:io:stdout`) in {
+  contract count(@n) = {
+    if (n > 0) { stdout!(n) | count!(__) }
+  } |
+  count!(3)
+}
+
+// koan: 06.05 — Combine a recursive result
+// Sum a list by asking for the tail sum on a private reply channel, then combining it
+// with the head. The empty list contributes zero.
+
+new sum, answer, stdout(`rho:io:stdout`) in {
+  contract sum(@xs, ret) = {
+    match xs {
+      [] => { ret!(0) }
+      [h ...t] => {
+        new rest in {
+          sum!(t, *rest) |
+          for (@s <- rest) { ret!(h __ s) }
+        }
+      }
+    }
+  } |
+  sum!([1, 2, 3], *answer) |
+  for (@n <- answer) { stdout!(n) }
+}
+
+// koan: 06.06 — A service can create another service
+// The factory creates a private adder that remembers amount. Use the returned adder to
+// produce 12 when amount is 5.
+
+new makeAdder, made, stdout(`rho:io:stdout`) in {
+  contract makeAdder(@amount, ret) = {
+    new add in {
+      contract add(@n, out) = { out!(n + amount) } |
+      ret!(*add)
+    }
+  } |
+  makeAdder!(5, *made) |
+  for (adder <- made) {
+    new out in {
+      adder!(__, *out) |
+      for (@n <- out) { stdout!(n) }
+    }
+  }
+}
