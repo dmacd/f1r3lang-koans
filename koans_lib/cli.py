@@ -8,7 +8,8 @@ from pathlib import Path
 import sys
 import time
 
-from .runner import CourseError, evaluate, failure_message, first_failure, installed_tools, load_course
+from .runner import CourseError, evaluate, first_failure, installed_tools, load_course
+from .reporting import Style, color_enabled, report_message
 from .workspace import initialize_exercises
 
 
@@ -34,7 +35,8 @@ def watch_signature(root: Path) -> str:
     return h.hexdigest()
 
 
-def verify(root: Path, tools: dict, timeout: float) -> int:
+def verify(root: Path, tools: dict, timeout: float, color: bool = False) -> int:
+    style = Style(color)
     exercises = load_course(root, starters=True)
     failures = 0
     for e in exercises:
@@ -42,12 +44,12 @@ def verify(root: Path, tools: dict, timeout: float) -> int:
         starter = evaluate(root, e, tools, timeout)
         if not answer.passed or starter.passed:
             failures += 1
-            print(f"FAIL {e['id']}: solution={answer.kind}, starter={starter.kind}")
+            print(style(f"FAIL {e['id']}: solution={answer.kind}, starter={starter.kind}", "fail"))
             if not answer.passed:
                 print(answer.detail, answer.actual, answer.stdout, answer.stderr)
         else:
-            print(f"PASS {e['id']} (solution passes; starter fails)", flush=True)
-    print(f"\nVerified {len(exercises)} koans; {failures} failures.")
+            print(style(f"PASS {e['id']} (solution passes; starter fails)", "pass"), flush=True)
+    print(style(f"\nVerified {len(exercises)} koans; {failures} failures.", "fail" if failures else "pass"))
     return 1 if failures else 0
 
 
@@ -56,29 +58,30 @@ def main(argv: list[str] | None = None, root: Path = ROOT) -> int:
     parser.add_argument("--once", action="store_true", help="run once and exit (also used when stdin is not a terminal)")
     parser.add_argument("--hint", action="store_true", help="show all hints for the first failing koan")
     parser.add_argument("--verify", action="store_true", help="maintainer check: reference solutions pass and untouched starters fail")
+    parser.add_argument("--color", choices=("auto", "always", "never"), default="auto",
+                        help="terminal colors (default: auto; honors NO_COLOR)")
     parser.add_argument("--timeout", type=float, default=10, metavar="SECONDS", help="maximum time per exercise (default: 10)")
     args = parser.parse_args(argv)
     if not math.isfinite(args.timeout) or args.timeout <= 0:
         parser.error("--timeout must be a finite positive number")
+    color = color_enabled(args.color, sys.stdout)
+    style = Style(color)
     try:
         tools = installed_tools(root)
         if args.verify:
-            return verify(root, tools, args.timeout)
+            return verify(root, tools, args.timeout, color)
         initialize_exercises(root)
         once = args.once or not sys.stdin.isatty()
         cache = None if once else {}
-        print("f1r3lang Koans · edit the indicated file and save.", flush=True)
+        print(style("f1r3lang Koans · edit the indicated file and save."), flush=True)
         while True:
             before = watch_signature(root)
             try:
                 tools = installed_tools(root)
                 exercises = load_course(root)
-                index, result = first_failure(root, exercises, tools, args.timeout, cache)
-                if result is None:
-                    print(f"\nAll {len(exercises)} koans pass. Take a moment to explain why each one works.", flush=True)
-                else:
-                    print(failure_message(root, exercises, index, result, args.hint), flush=True)
-                status = 0 if result is None else 1
+                summary = first_failure(root, exercises, tools, args.timeout, cache)
+                print(report_message(root, exercises, summary, args.hint, color), flush=True)
+                status = 0 if summary.failure is None else 1
             except (CourseError, OSError) as exc:
                 # Editors may briefly remove a file during an atomic save. Keep
                 # watching so a corrected source/configuration can recover.

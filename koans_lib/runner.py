@@ -9,7 +9,6 @@ import re
 import signal
 import subprocess
 import tempfile
-import textwrap
 from dataclasses import dataclass
 from collections import Counter
 
@@ -26,6 +25,20 @@ class Result:
     detail: str = ""
     stdout: str = ""
     stderr: str = ""
+
+
+@dataclass(frozen=True)
+class CachedPass:
+    fingerprint: str
+    result: Result
+
+
+@dataclass(frozen=True)
+class RunSummary:
+    completed: int
+    failure: Result | None
+    last_pass: Result | None = None
+    last_pass_cached: bool = False
 
 
 @dataclass(frozen=True)
@@ -227,20 +240,34 @@ WAIT = "This is taking a long time. Feel free to ^C and quit."
 RUNTIME_ERRORS = "Errors received during evaluation:"
 
 
+def stdout_events(text: str) -> list[str]:
+    """Separate printed observations from the pinned CLI's own diagnostics."""
+    events = []
+    for line in text.splitlines():
+        if line == RUNTIME_ERRORS:
+            break
+        if line != WAIT and not COST.fullmatch(line):
+            events.append(line)
+    return events
+
+
 def rho_result(raw: Result, expect: dict) -> Result:
     if not raw.passed:
+        if raw.kind in ("timeout", "crash"):
+            raw.actual = stdout_events(raw.stdout)
         return raw
     # This CLI returns zero even when EvalResult.errors is nonempty. Never use
     # exit status alone, and never hide its diagnostics behind an output mismatch.
     if RUNTIME_ERRORS in raw.stdout.splitlines():
         raw.passed, raw.kind = False, "runtime"
+        raw.actual = stdout_events(raw.stdout)
         raw.detail = "The interpreter reported a runtime error."
         return raw
     lines = raw.stdout.splitlines()
     costs = [i for i, line in enumerate(lines) if COST.fullmatch(line)]
     if len(costs) != 1:
         raise CourseError("Unrecognized interpreter output: expected one evaluation-cost footer. The backend adapter needs checking.")
-    events = [line for i, line in enumerate(lines) if i != costs[0] and line != WAIT]
+    events = stdout_events(raw.stdout)
     # Blank lines are data too. Authored output uses one printed value per event.
     expected = expect["events"]
     passed = (events == expected if expect["mode"] == "ordered" else Counter(events) == Counter(expected))
@@ -328,19 +355,24 @@ def fingerprint(root: Path, exercise: dict, tools: dict[str, Path]) -> str:
 
 
 def first_failure(root: Path, exercises: list[dict], tools: dict[str, Path], timeout: float,
-                  cache: dict | None = None) -> tuple[int, Result | None]:
+                  cache: dict[str, CachedPass] | None = None) -> RunSummary:
+    previous = None
+    previous_cached = False
     for index, exercise in enumerate(exercises):
         key = fingerprint(root, exercise, tools) if cache is not None else None
-        if cache is not None and cache.get(exercise["id"]) == key:
+        cached = cache.get(exercise["id"]) if cache is not None else None
+        if cached is not None and cached.fingerprint == key:
+            previous, previous_cached = cached.result, True
             continue
         result = evaluate(root, exercise, tools, timeout)
         if not result.passed:
             if cache is not None:
                 cache.pop(exercise["id"], None)
-            return index, result
+            return RunSummary(index, result, previous, previous_cached)
         if cache is not None:
-            cache[exercise["id"]] = key
-    return len(exercises), None
+            cache[exercise["id"]] = CachedPass(key, result)
+        previous, previous_cached = result, False
+    return RunSummary(len(exercises), None, previous, previous_cached)
 
 
 def source_frame(root: Path, exercise: dict, result: Result) -> str:
@@ -360,36 +392,3 @@ def source_frame(root: Path, exercise: dict, result: Result) -> str:
     stop = min(source.first_line + len(lines) - 1, line + 2)
     excerpt = "\n".join(f"{'>' if i == line else ' '} {i:3} | {lines[i - source.first_line]}" for i in range(start, stop + 1))
     return f"{exercise['source']}:{line}\n{excerpt}"
-
-
-def failure_message(root: Path, exercises: list[dict], index: int, result: Result,
-                    all_hints: bool = False) -> str:
-    e = exercises[index]
-    label = "executes" if e["backend"] == "rho" else "compiler-checked declaration"
-    parts = [f"\n{index}/{len(exercises)} koans complete · {e['chapter']}",
-             f"Now contemplate {e['id']}: {e['title']} ({label})", "",
-             source_frame(root, e, result), "", textwrap.fill(e["context"], width=88), "",
-             f"{result.kind.upper()}: {result.detail}".rstrip()]
-    if result.kind in ("compiler", "runtime", "crash", "timeout"):
-        if result.stderr:
-            parts.extend(["\nCompiler / runtime stderr:", result.stderr.rstrip("\n")])
-        if result.stdout:
-            parts.extend(["\nCompiler / runtime stdout:", result.stdout.rstrip("\n")])
-    elif result.actual is not None:
-        expected = e["expect"].get("events", e["expect"])
-        if isinstance(expected, dict):
-            for section in expected:
-                if Counter(expected[section]) != Counter(result.actual[section]):
-                    parts.extend([f"Expected {section}: {json.dumps(expected[section], ensure_ascii=False)}",
-                                  f"Actual   {section}: {json.dumps(result.actual[section], ensure_ascii=False)}"])
-        else:
-            parts.extend([f"Expected ({e['expect']['mode']}): {json.dumps(expected, ensure_ascii=False)}",
-                          f"Actual: {json.dumps(result.actual, ensure_ascii=False)}"])
-        if result.stderr:
-            parts.extend(["\nCompiler / runtime stderr:", result.stderr.rstrip("\n")])
-    hints = e["hints"] if all_hints else e["hints"][:1]
-    parts.extend(["", *(f"Hint: {hint}" for hint in hints)])
-    parts.append(f"Chapter notes: {Path(e['source']).parent / 'README.md'}")
-    if not all_hints and len(e["hints"]) > 1:
-        parts.append("Use ./koans --hint for another hint.")
-    return "\n".join(parts)

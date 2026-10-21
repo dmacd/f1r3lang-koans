@@ -31,6 +31,20 @@ the runner states whether a particular expectation is ordered or unordered.
 For `.module` failures, compare the indicated presentation section. A theory
 can elaborate successfully and still declare the wrong language.
 
+Read **Expected stdout** and **Actual stdout** in the current test's report.
+Missing and unexpected values are counted; ordered tests identify the first
+different line. `(nothing printed)` means an empty observation, while
+`(blank line)` is an actual output line. **PASS** shows the previous test's
+result, and **FAIL** marks the test to edit. A cached pass shows its previously
+observed output; unchanged earlier tests are not executed again on every save.
+
+## Terminal colors are hard to read or missing
+
+Use `./koans --color never` for plain text, or `./koans --color always` if your
+editor terminal supports colors but is not detected automatically. `NO_COLOR=1`
+and `TERM=dumb` disable automatic coloring, as does piping output to a file or
+another command. The PASS/FAIL labels and output sections work without color.
+
 ## A timeout or runtime error
 
 A timeout stops the tool and its child processes. Look for recursion that

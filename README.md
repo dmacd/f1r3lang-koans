@@ -41,27 +41,56 @@ in `starters/`; work through the koans in `exercises/`.
 2. Read its short explanation and replace `__` with code. Keep the surrounding
    program, and aim to understand why your change works.
 3. Save. In a terminal, the runner watches your files, checks them in course
-   order, and stops at the first failure. A passing koan takes you to the next
-   section in the same file. Open a new file when you reach the next chapter.
+   order, and stops at the first failure. It shows the **last passing test**
+   and the **current failing test**, including what each expected and produced.
+   A passing koan takes you to the next section in the same file. Open a new
+   file when you reach the next chapter.
 4. Read the linked chapter notes if the syntax is unfamiliar. Use
    `./koans --hint` for a stronger hint. Ctrl-C exits the watcher.
 
 The first failure looks like this (paths and compiler wording may be longer):
 
 ```text
-0/72 koans complete · Values and observations
-Now contemplate 01.01: A first observation (executes)
+0/72 koans complete
 
+FAIL 01.01: A first observation
+Current test · Values and observations
+
+What this tests
+stdout!(value) prints a value. Make this program print the Boolean value true.
+...
+
+Assert stdout matches (in any order; repeated values count)
+Expected stdout
+   1 | true
+Actual stdout
+  (not run: compilation failed)
+
+Source
 exercises/01_values/koans.rho:11
 >  11 |   stdout!(__)
 
 COMPILER: The language tool exited with status 1.
+Native diagnostics · stderr
 ...
 Top level free variables are not allowed: __ at SourceSpan { ... }
 
+Hints
 Hint: A Boolean literal is written without quotation marks.
 Chapter notes: exercises/01_values/README.md
 ```
+
+After you fix a koan, its green **PASS** section shows the expected and actual
+output above the next red **FAIL** section. It stays visible while you work on
+the next test. Reused results are marked **cached; source unchanged**.
+
+Every koan has an assertion: runtime tests compare the values printed to
+`stdout`, and module tests compare the compiled definitions. The report always
+shows the assertion, even when the source fails to compile. Output lines retain
+their quotation marks; `(nothing printed)` and `(blank line)` are distinct.
+Mismatches identify missing or unexpected values, including duplicates, or the
+first differing line when order matters. Output captured before a runtime error
+or timeout is shown separately from the original tool diagnostics.
 
 `__` is an intentional hole, not special language syntax. The real compiler
 usually rejects it. An assertion failure means your code ran, but the observed
@@ -82,8 +111,15 @@ must match. Acknowledgment exercises explicitly check order.
 ./koans --once          # run once; useful in an editor or a script
 ./koans --once --hint   # run once with all hints for the current failure
 ./koans --timeout 20    # change the maximum seconds per exercise
+./koans --color never   # plain text with the same sections and feedback
+./koans --color always  # force colors in an editor terminal that needs it
 ./koans --help
 ```
+
+Colors are automatic when output is a terminal. Piped output stays plain;
+`NO_COLOR=1 ./koans` also disables automatic colors. Explicit `--color` options
+override automatic detection. Green means pass, red means fail, cyan labels
+sections, and yellow marks hints; the text labels remain clear without color.
 
 Noninteractive input also selects one-shot mode. Exit statuses are `0` for all
 passing, `1` for a failing koan, `2` for setup/configuration errors, and `130`

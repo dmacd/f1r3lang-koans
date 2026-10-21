@@ -10,8 +10,9 @@ import unittest
 from unittest.mock import patch
 
 from koans_lib.cli import main
+from koans_lib.reporting import failure_message
 from koans_lib.runner import (
-    CourseError, Result, digest, failure_message, first_failure, inside,
+    CourseError, Result, RunSummary, digest, first_failure, inside,
     installed_tools, load_course, presentation, read_source, rho_result, run_process,
 )
 
@@ -49,7 +50,16 @@ class AdapterTests(unittest.TestCase):
         result = self.observe(raw, ['7'])
         self.assertFalse(result.passed)
         self.assertEqual(result.kind, "runtime")
+        self.assertEqual(result.actual, ["7"])
         self.assertEqual(result.stdout, raw)
+
+    def test_partial_output_is_retained_after_timeout_or_crash(self):
+        for kind in ("timeout", "crash"):
+            raw = Result(False, kind, stdout='7\n\n')
+            result = rho_result(raw, {"mode": "ordered", "events": ["7"]})
+            self.assertFalse(result.passed)
+            self.assertEqual(result.kind, kind)
+            self.assertEqual(result.actual, ["7", ""])
 
     def test_no_output_fails_and_blank_lines_are_not_discarded(self):
         self.assertEqual(self.observe(COST, ['1']).kind, "no-output")
@@ -142,9 +152,10 @@ class CourseTests(Fixture):
 
     def test_stops_before_later_exercises(self):
         with patch("koans_lib.runner.evaluate", side_effect=[Result(True, "pass"), Result(False, "assertion")]) as call:
-            index, result = first_failure(self.root, self.exercises, self.tools, 1)
-        self.assertEqual(index, 1)
-        self.assertFalse(result.passed)
+            summary = first_failure(self.root, self.exercises, self.tools, 1)
+        self.assertEqual(summary.completed, 1)
+        self.assertFalse(summary.failure.passed)
+        self.assertTrue(summary.last_pass.passed)
         self.assertEqual(call.call_count, 2)
 
     def test_success_cache_invalidates_on_earlier_edits(self):
@@ -155,9 +166,28 @@ class CourseTests(Fixture):
             self.assertEqual(call.call_count, 3)
             (self.root / self.exercises[0]["source"]).write_text("changed")
             call.return_value = Result(False, "compiler")
-            index, _ = first_failure(self.root, self.exercises, self.tools, 1, cache)
-            self.assertEqual(index, 0)
+            summary = first_failure(self.root, self.exercises, self.tools, 1, cache)
+            self.assertEqual(summary.completed, 0)
+            self.assertIsNone(summary.last_pass)
             self.assertEqual(call.call_count, 4)
+
+    def test_last_passing_output_survives_cache_hits_and_regressions(self):
+        passed = Result(True, "pass", ["7"], stdout="7\n" + COST)
+        failed = Result(False, "compiler", stderr="native error")
+        cache = {}
+        with patch("koans_lib.runner.evaluate", side_effect=[passed, failed, failed, failed]) as call:
+            first = first_failure(self.root, self.exercises, self.tools, 1, cache)
+            second = first_failure(self.root, self.exercises, self.tools, 1, cache)
+            self.assertEqual(first.completed, 1)
+            self.assertEqual(second.last_pass.actual, ["7"])
+            self.assertFalse(first.last_pass_cached)
+            self.assertTrue(second.last_pass_cached)
+            self.assertEqual(call.call_count, 3)
+            (self.root / self.exercises[0]["source"]).write_text("changed")
+            regression = first_failure(self.root, self.exercises, self.tools, 1, cache)
+        self.assertEqual(regression.completed, 0)
+        self.assertIsNone(regression.last_pass)
+        self.assertNotIn(self.exercises[0]["id"], cache)
 
     def test_cache_invalidates_for_import_manifest_tool_and_lock(self):
         e = self.exercises[0]
@@ -191,7 +221,7 @@ class CourseTests(Fixture):
 
     def test_cli_statuses_pass_fail_infrastructure(self):
         for result, expected in ((None, 0), (Result(False, "compiler", stderr="native error"), 1)):
-            with self.subTest(status=expected), patch("koans_lib.cli.first_failure", return_value=(0, result)), patch("sys.stdout", new=io.StringIO()):
+            with self.subTest(status=expected), patch("koans_lib.cli.first_failure", return_value=RunSummary(0, result)), patch("sys.stdout", new=io.StringIO()):
                 self.assertEqual(main(["--once"], self.root), expected)
         (self.root / "course.json").write_text("{")
         with patch("sys.stderr", new=io.StringIO()), patch("sys.stdout", new=io.StringIO()):

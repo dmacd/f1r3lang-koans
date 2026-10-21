@@ -26,7 +26,8 @@ file or section into `exercises/` after saving any answers you want to retain.
 The unit and integration suite covers first-failure behavior, output
 comparison, real diagnostics, runtime failures with zero exit status,
 timeouts and child cleanup, isolated stores, changed-file caching, imports,
-watcher recovery, checksum failures, and partial-download recovery. It also
+watcher recovery, visible output assertions, color selection, checksum failures,
+and partial-download recovery. It also
 executes each chapter's worked example. Native tests require `./setup`;
 missing tools are an error rather than silently skipped tests.
 
@@ -48,6 +49,16 @@ original chapter. Native line and column numbers therefore remain accurate.
 Local imports retain their paths through a temporary directory layout; source
 files are never overwritten during evaluation. Passed sections are cached by
 their own contents, so editing the next section keeps earlier results cached.
+The cache retains each passing result as well as its fingerprint. Reports show
+the last passing result alongside the current failure, including when that
+pass is reused from the cache. An earlier failure must not display a stale
+later pass.
+
+`koans_lib/reporting.py` formats the assertions, observations, source context,
+hints, and native diagnostics into separate terminal sections. Keep diagnostics
+intact, and distinguish a compile failure from an empty observation or output
+captured before an evaluation error. Colors are optional; plain output carries
+the same information. Module tests report definitions, not program output.
 
 An entry can also list `inputs` for shared support files. Author those files
 under `starters/` and list their matching `exercises/` paths in the manifest.

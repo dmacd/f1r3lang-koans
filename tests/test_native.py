@@ -44,8 +44,11 @@ class NativeTests(unittest.TestCase):
         self.assertIn("line: 2", result.stderr)
 
     def test_zero_exit_runtime_error_is_a_failure(self):
-        result = self.rho('stdout!(7) | stdout!(1 / 0)')
+        result = self.rho('''new ack, stdoutAck(`rho:io:stdoutAck`) in {
+          stdoutAck!(7, *ack) | for (_ <- ack) { stdout!(1 / 0) }
+        }''')
         self.assertEqual(result.kind, "runtime")
+        self.assertEqual(result.actual, ["7"])
         self.assertIn("Errors received during evaluation:", result.stdout)
         self.assertIn("Division by zero", result.stdout)
 
